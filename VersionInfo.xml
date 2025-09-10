@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <VersionInfo>
-  <Version>5.4.9308.27546</Version>
+  <Version>5.5.9384.40824</Version>
   <UpdaterVersion>1.2.3.0</UpdaterVersion>
-  <Date>2025-06-26</Date>
+  <Date>2025-09-10</Date>
   <Url>https://raw.githubusercontent.com/pungin/Beanfun/master/Beanfun.zip</Url>
-  <Note>| 修復遊戲新楓之谷自動輸入異常
+  <Note>| 更正V.273楓之谷登入頁面自動輸入異常
+| Locale Remulator版本更新到V.1.6.0
   </Note>
 </VersionInfo>
