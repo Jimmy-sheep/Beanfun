@@ -47,13 +47,13 @@
   <system:String x:Key="Email">發送電郵</system:String>
   <system:String x:Key="Back">返回</system:String>
   <system:String x:Key="Feedback">繽放 反饋/建議</system:String>
-  <system:String x:Key="FeedbackText">軟體版本: {0}%0d反饋/建議訊息:%0d</system:String>
+  <system:String x:Key="FeedbackText">軟體版本：{0}%0d反饋/建議訊息:%0d</system:String>
   <system:String x:Key="AccountList">帳號選單</system:String>
   <system:String x:Key="GameChange">更換遊戲</system:String>
   <system:String x:Key="GameStart">啟動遊戲</system:String>
   <system:String x:Key="Logout">登出</system:String>
   <system:String x:Key="Tools">工具</system:String>
-  <system:String x:Key="GashRemain">樂豆: {0} 點</system:String>
+  <system:String x:Key="GashRemain">樂豆：{0} 點</system:String>
   <system:String x:Key="GashRemainInGame"> (遊戲內 {0})</system:String>
   <system:String x:Key="GashRefresh">更新點數</system:String>
   <system:String x:Key="GashRecharge">儲值與購點</system:String>
@@ -78,7 +78,7 @@
     <Run Text="自動輸入需要遊戲在輸入帳密界面" />
     <LineBreak />
     <LineBreak />
-    <Run Text="※ 自動輸入功能可能會由於遊戲限制出現偶爾無法正常進行的問題, 請斟酌使用" />
+    <Run Text="※ 自動輸入功能可能會由於遊戲限制出現偶爾無法正常進行的問題，請斟酌使用" />
   </TextBlock>
   <system:String x:Key="ClickToCopy">點擊自動複製</system:String>
   <system:String x:Key="LogoutConfirm">即將登出，是否要繼續？</system:String>
@@ -180,14 +180,14 @@
   <system:String x:Key="tbBeanfunRemark">請輸入帳號備註(不設定則留空)</system:String>
   <system:String x:Key="tbBeanfunPassword">密碼(不儲存則留空)</system:String>
   <system:String x:Key="tbBeanfunAuthInfo">認證訊息(不儲存則留空)</system:String>
-  <system:String x:Key="ServiceAccountDisplayName">使用者名稱:</system:String>
+  <system:String x:Key="ServiceAccountDisplayName">使用者名稱：</system:String>
   <system:String x:Key="IAgree">我同意</system:String>
   <system:String x:Key="TermsOfService">服務條款</system:String>
   <system:String x:Key="SystemInfo">系統訊息</system:String>
   <system:String x:Key="MsgDisplayNameNeed">請輸入使用者名稱！</system:String>
   <system:String x:Key="MsgTermsOfServiceNeed">您必須先同意服務條款才可新增帳號！</system:String>
   <system:String x:Key="MsgCreateServiceAccountFailed"
-    >新增遊戲帳號失敗, 可能這個遊戲無法創建帳號。</system:String
+    >新增遊戲帳號失敗，可能這個遊戲無法創建帳號。</system:String
   >
   <system:String x:Key="UnknownError">發生未知錯誤</system:String>
   <system:String x:Key="CaptchaCode">圖形驗證碼：</system:String>
@@ -196,7 +196,7 @@
   <system:String x:Key="LoadCaptchaFailed">載入圖形驗證碼失敗</system:String>
   <system:String x:Key="EditAccount">變更帳號</system:String>
   <system:String x:Key="EditAccountSave">變更</system:String>
-  <system:String x:Key="MsgChangeDisplayNameError">未知錯誤, 更變遊戲帳號名失敗。</system:String>
+  <system:String x:Key="MsgChangeDisplayNameError">未知錯誤，更變遊戲帳號名失敗。</system:String>
   <system:String x:Key="Copy">複製</system:String>
   <system:String x:Key="CopyFinished">複製完成</system:String>
   <system:String x:Key="CopyFailed">複製失敗</system:String>
@@ -274,9 +274,9 @@
   <system:String x:Key="UnconnectedGame_AddAccount_7">位英數字組合而成。</system:String>
   <system:String x:Key="UnconnectedGame_AddAccount_8">設定專用於</system:String>
   <system:String x:Key="UnconnectedGame_AddAccount_9">確認專用於</system:String>
-  <system:String x:Key="UnconnectedGame_AddAccount_10">暱稱:</system:String>
+  <system:String x:Key="UnconnectedGame_AddAccount_10">暱稱：</system:String>
   <system:String x:Key="UnconnectedGame_AddAccount_11">( 2~6個中英文字元 )</system:String>
-  <system:String x:Key="UnconnectedGame_AddAccount_12">暱稱:</system:String>
+  <system:String x:Key="UnconnectedGame_AddAccount_12">暱稱：</system:String>
   <system:String x:Key="UnconnectedGame_AddAccount_13">檢查帳號</system:String>
   <system:String x:Key="UnconnectedGame_AddAccount_14">檢查暱稱</system:String>
   <system:String x:Key="UnconnectedGame_AddAccount_15">我同意並已閱讀</system:String>
@@ -294,13 +294,13 @@
     >您必須先同意服務條款才可新增帳號！</system:String
   >
   <system:String x:Key="UnconnectedGame_AddAccount_27"
-    >新增遊戲帳號失敗, 可能這個遊戲無法創建帳號。</system:String
+    >新增遊戲帳號失敗，可能這個遊戲無法創建帳號。</system:String
   >
   <system:String x:Key="ChangePassword">修改密碼</system:String>
   <system:String x:Key="AuthEmailNeed">&gt; 輸入認證時的e-mail信箱：</system:String>
   <system:String x:Key="DataSended">資料已寄出！</system:String>
   <system:String x:Key="MsgChangePassword"
-    >請至您已認證的e - mail信箱中收取密碼設定信喲！\r\n確認碼: {0}\r\n為保障安全!請您在收到信後，\r\n點選連結前先確認信中的確認碼是否相同正確喔！</system:String
+    >請至您已認證的e - mail信箱中收取密碼設定信喲！\r\n確認碼：{0}\r\n為保障安全!請您在收到信後，\r\n點選連結前先確認信中的確認碼是否相同正確喔！</system:String
   >
   <system:String x:Key="AuthReLogin">請完成進階認證後重新登入</system:String>
   <system:String x:Key="NetworkConnectionError"
@@ -372,13 +372,13 @@
   >
   <system:String x:Key="MsgGamePathHaveWChar">遊戲路徑有中文，可能無法正常運行。</system:String>
   <system:String x:Key="MsgGameAlreadyRun"
-    >遊戲已經運行,可能是客戶端問題導致未完全結束程序,是否要結束遊戲?</system:String
+    >遊戲已經運行，可能是客戶端問題導致未完全結束程序，是否要結束遊戲？</system:String
   >
   <system:String x:Key="MsgLRDoNotSupportCmd"
-    >以非繁體語係系統啟動64-Bit遊戲的方式不支援非傳統登入模式。</system:String
+    >以非繁體語系系統啟動 64-Bit 遊戲的方式不支援非傳統登入模式。</system:String
   >
   <system:String x:Key="MsgLEDoNotSupportXP"
-    >以非繁體語係系統啟動遊戲的方式不支援Windows XP。</system:String
+    >以非繁體語系系統啟動遊戲的方式不支援 Windows XP。</system:String
   >
   <system:String x:Key="MsgLocalePluginRunError"
     >啟動失敗，請嘗試從桌面捷徑直接啟動遊戲。\r\n\r\n若您系統為非繁體語係系統，可能是區域模擬元件不支援您的系統或是遊戲自動更新導致遊戲損壞了(可以嘗試重新安裝遊戲)。</system:String
@@ -387,14 +387,14 @@
     >釋出區域模擬元件錯誤，請重新啟動電腦後再次嘗試。</system:String
   >
   <system:String x:Key="MsgLEError0xC00700C1"
-    >非繁體語係系統啟動遊戲失敗\r\n錯誤碼: {0}\r\n導致這個錯誤的原因可能是因為使用了遊戲的自動更新，導致遊戲損壞了。\r\n\r\n解決方案:\r\n- 如果官方有fix更新檔請下載下來手動更新一下遊戲\r\n- 如果官方沒有fix更新檔或上面方法無法解決請嘗試重新安裝遊戲\r\n</system:String
+    >非繁體語係系統啟動遊戲失敗\r\n錯誤碼：{0}\r\n導致這個錯誤的原因可能是因為使用了遊戲的自動更新，導致遊戲損壞了。\r\n\r\n解決方案:\r\n- 如果官方有fix更新檔請下載下來手動更新一下遊戲\r\n- 如果官方沒有fix更新檔或上面方法無法解決請嘗試重新安裝遊戲\r\n</system:String
   >
   <system:String x:Key="MsgLEError"
-    >非繁體語係系統啟動遊戲失敗\r\n錯誤碼: {0}\r\n{1}\r\n{2}\r\n如果你有運行任何防毒軟體, 請關閉後再次嘗試。\r\n如果仍然顯示此視窗, 請嘗試以「安全模式」啟動程式。如果你進行了以上的嘗試仍然沒有一個有效，請隨時在後面的連結提交問題\r\nhttps://github.com/xupefei/Locale-Emulator/issues\r\n\r\n\r\n你可以按 CTRL+C 將此訊息複製到你的剪貼板。\r\n</system:String
+    >非繁體語係系統啟動遊戲失敗\r\n錯誤碼：{0}\r\n{1}\r\n{2}\r\n如果你有運行任何防毒軟體，請關閉後再次嘗試。\r\n如果仍然顯示此視窗，請嘗試以「安全模式」啟動程式。如果你進行了以上的嘗試仍然沒有一個有效，請隨時在後面的連結提交問題\r\nhttps://github.com/xupefei/Locale-Emulator/issues\r\n\r\n\r\n你可以按 CTRL+C 將此訊息複製到你的剪貼板。\r\n</system:String
   >
   <system:String x:Key="MsgBeanfunRejectLogin">您的登入要求已被beanfun! App拒絕。</system:String>
-  <system:String x:Key="ClientVersion">客戶端版本:</system:String>
-  <system:String x:Key="ServerVersion">伺服器版本:</system:String>
+  <system:String x:Key="ClientVersion">客戶端版本：</system:String>
+  <system:String x:Key="ServerVersion">伺服器版本：</system:String>
   <system:String x:Key="MsgKillPatcher"
     >遊戲自動更新有可能會造成遊戲程式損毀，已被阻止。{0}\r\n建議下載{1}{2}，如需要使用自動更新功能請到設定頁面取消阻止。\r\n是否前往下載{3}頁面？</system:String
   >
@@ -408,7 +408,7 @@
   <system:String x:Key="UpdateCheck">更新檢測</system:String>
   <system:String x:Key="NoUpdatesDetected">未檢測到有更新。</system:String>
   <system:String x:Key="NewVersionDetected"
-    >檢測到新版本 {0} 目前: {1}\r\n\r\n{2}\r\n\r\n是否打開下載頁面？</system:String
+    >檢測到新版本 {0} 目前：{1}\r\n\r\n{2}\r\n\r\n是否打開下載頁面？</system:String
   >
   <system:String x:Key="Language">程式語言</system:String>
   <system:String x:Key="InputTotp">輸入應用程式內顯示的雙重驗證碼</system:String>
