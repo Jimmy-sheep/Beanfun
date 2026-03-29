@@ -34,18 +34,13 @@ namespace Beanfun
         private void btn_VideoReport_Click(object sender, RoutedEventArgs e)
         {
             new WebBrowser(
-                "https://event.beanfun.com/MapleStory/eventad/EventAD.aspx?EventADID=3453"
+                "https://maplestory-event.beanfun.com/eventad/eventad?eventadid=3453"
             ).Show();
         }
 
         private void btn_EquipCalculator_Click(object sender, RoutedEventArgs e)
         {
             new EquipCalculator().Show();
-        }
-
-        private void btn_CoreCaculator_Click(object sender, RoutedEventArgs e)
-        {
-            new CoreCalculator().Show();
         }
 
         private void btn_Recycling_Click(object sender, RoutedEventArgs e)

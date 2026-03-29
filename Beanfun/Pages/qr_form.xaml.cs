@@ -20,29 +20,6 @@ namespace Beanfun
             App.MainWnd.refreshQRCode();
         }
 
-        private void btn_Refresh_QRCode_MouseEnter(object sender, MouseEventArgs e)
-        {
-            if (qr_Tip.Visibility == Visibility.Collapsed)
-            {
-                DockPanel.SetDock(btn_Refresh_QRCode, Dock.Left);
-                qr_Tip.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void qr_Tip_Click(object sender, RoutedEventArgs e)
-        {
-            Process.Start("https://tw.beanfun.com/bfevent/bfApp/Page20160930/PC/index.html");
-        }
-
-        private void TextBlock_MouseLeave(object sender, MouseEventArgs e)
-        {
-            if (qr_Tip.Visibility == Visibility.Visible)
-            {
-                DockPanel.SetDock(btn_Refresh_QRCode, Dock.Top);
-                qr_Tip.Visibility = Visibility.Collapsed;
-            }
-        }
-
         private void btn_CopyDeeplink_Click(object sender, RoutedEventArgs e)
         {
             var qrcodeClass = App.MainWnd.qrcodeClass;

@@ -11,6 +11,7 @@
   MouseLeftButtonDown="Window_MouseLeftButtonDown"
   SizeToContent="WidthAndHeight"
   ResizeMode="NoResize"
+  SnapsToDevicePixels="True"
 >
   <Grid>
     <StackPanel Margin="20">
@@ -21,11 +22,6 @@
         Content="{DynamicResource EquipStarForceCaculator}"
         Margin="5"
         Click="btn_EquipCalculator_Click"
-      />
-      <Button
-        Content="{DynamicResource PerfectCoreCaculator}"
-        Margin="5"
-        Click="btn_CoreCaculator_Click"
       />
     </StackPanel>
   </Grid>
