@@ -118,6 +118,15 @@
               VerticalContentAlignment="Center"
               Checked="rb_ReqLev_IsCheckedChanged"
             />
+            <RadioButton
+              x:Name="rb_Lv250"
+              GroupName="rb_ReqLev"
+              Content="250"
+              Foreground="Orange"
+              Margin="3"
+              VerticalContentAlignment="Center"
+              Checked="rb_ReqLev_IsCheckedChanged"
+            />
           </StackPanel>
           <StackPanel Orientation="Horizontal" Margin="0,3">
             <Label
@@ -346,7 +355,7 @@
             />
             <Label
               x:Name="lbl_StarForceMax"
-              Content="25"
+              Content="30"
               Foreground="White"
               VerticalAlignment="Center"
             />
@@ -360,6 +369,18 @@
       </Border>
       <DockPanel Margin="5">
         <StackPanel>
+          <Image
+            Source="/Beanfun;component/Resources/Scroll_StarShining.png"
+            Stretch="None"
+            RenderOptions.BitmapScalingMode="NearestNeighbor"
+            Height="32"
+          />
+          <Image
+            Source="/Beanfun;component/Resources/Scroll_SaveWorld.png"
+            Stretch="None"
+            RenderOptions.BitmapScalingMode="NearestNeighbor"
+            Height="32"
+          />
           <Image
             Source="/Beanfun;component/Resources/Scroll_Glory.png"
             Stretch="None"
@@ -423,6 +444,16 @@
         </StackPanel>
         <StackPanel>
           <Label
+            Content="{DynamicResource ScrollStarShining}"
+            Height="32"
+            VerticalContentAlignment="Center"
+          />
+          <Label
+            Content="{DynamicResource ScrollSaveWorld}"
+            Height="32"
+            VerticalContentAlignment="Center"
+          />
+          <Label
             Content="{DynamicResource ScrollDestiny}"
             Height="32"
             VerticalContentAlignment="Center"
@@ -474,6 +505,130 @@
           />
         </StackPanel>
         <StackPanel>
+          <DockPanel>
+            <TextBox
+              x:Name="t_StarShiningNum"
+              MinWidth="30"
+              TextChanged="calcStat_TextChanged"
+              VerticalAlignment="Center"
+              GotFocus="t_StarShiningNum_GotFocus"
+            >
+              <TextBox.Style>
+                <Style TargetType="TextBox">
+                  <Setter Property="Background" Value="{x:Null}" />
+                  <Style.Triggers>
+                    <MultiTrigger>
+                      <MultiTrigger.Conditions>
+                        <Condition Property="IsFocused" Value="False"></Condition>
+                        <Condition Property="Text" Value=""></Condition>
+                      </MultiTrigger.Conditions>
+                      <Setter Property="Background">
+                        <Setter.Value>
+                          <VisualBrush AlignmentX="Left" Stretch="None">
+                            <VisualBrush.Visual>
+                              <TextBlock Padding="2,0" Background="Transparent">0</TextBlock>
+                            </VisualBrush.Visual>
+                          </VisualBrush>
+                        </Setter.Value>
+                      </Setter>
+                    </MultiTrigger>
+                  </Style.Triggers>
+                </Style>
+              </TextBox.Style>
+            </TextBox>
+            <Label
+              Content="{DynamicResource Sheet}"
+              Height="32"
+              VerticalContentAlignment="Center"
+            />
+            <RadioButton
+              VerticalAlignment="Center"
+              x:Name="rb_StarShiningMin"
+              Content="{DynamicResource ScrollValueMin}"
+              Margin="3"
+              GroupName="rb_StarShiningType"
+              Checked="rb_StarShiningType_IsCheckedChanged"
+            />
+            <RadioButton
+              VerticalAlignment="Center"
+              x:Name="rb_StarShiningAverage"
+              Content="{DynamicResource ScrollValueAverage}"
+              Margin="3"
+              GroupName="rb_StarShiningType"
+              Checked="rb_StarShiningType_IsCheckedChanged"
+              IsChecked="True"
+            />
+            <RadioButton
+              VerticalAlignment="Center"
+              x:Name="rb_StarShiningMax"
+              Content="{DynamicResource ScrollValueMax}"
+              Margin="3"
+              GroupName="rb_StarShiningType"
+              Checked="rb_StarShiningType_IsCheckedChanged"
+            />
+          </DockPanel>
+          <DockPanel>
+            <TextBox
+              x:Name="t_SaveWorldNum"
+              MinWidth="30"
+              TextChanged="calcStat_TextChanged"
+              VerticalAlignment="Center"
+              GotFocus="t_SaveWorldNum_GotFocus"
+            >
+              <TextBox.Style>
+                <Style TargetType="TextBox">
+                  <Setter Property="Background" Value="{x:Null}" />
+                  <Style.Triggers>
+                    <MultiTrigger>
+                      <MultiTrigger.Conditions>
+                        <Condition Property="IsFocused" Value="False"></Condition>
+                        <Condition Property="Text" Value=""></Condition>
+                      </MultiTrigger.Conditions>
+                      <Setter Property="Background">
+                        <Setter.Value>
+                          <VisualBrush AlignmentX="Left" Stretch="None">
+                            <VisualBrush.Visual>
+                              <TextBlock Padding="2,0" Background="Transparent">0</TextBlock>
+                            </VisualBrush.Visual>
+                          </VisualBrush>
+                        </Setter.Value>
+                      </Setter>
+                    </MultiTrigger>
+                  </Style.Triggers>
+                </Style>
+              </TextBox.Style>
+            </TextBox>
+            <Label
+              Content="{DynamicResource Sheet}"
+              Height="32"
+              VerticalContentAlignment="Center"
+            />
+            <RadioButton
+              VerticalAlignment="Center"
+              x:Name="rb_SaveWorldMin"
+              Content="{DynamicResource ScrollValueMin}"
+              Margin="3"
+              GroupName="rb_SaveWorldType"
+              Checked="rb_SaveWorldType_IsCheckedChanged"
+            />
+            <RadioButton
+              VerticalAlignment="Center"
+              x:Name="rb_SaveWorldAverage"
+              Content="{DynamicResource ScrollValueAverage}"
+              Margin="3"
+              GroupName="rb_SaveWorldType"
+              Checked="rb_SaveWorldType_IsCheckedChanged"
+              IsChecked="True"
+            />
+            <RadioButton
+              VerticalAlignment="Center"
+              x:Name="rb_SaveWorldMax"
+              Content="{DynamicResource ScrollValueMax}"
+              Margin="3"
+              GroupName="rb_SaveWorldType"
+              Checked="rb_SaveWorldType_IsCheckedChanged"
+            />
+          </DockPanel>
           <DockPanel>
             <TextBox
               x:Name="t_DestinyNum"

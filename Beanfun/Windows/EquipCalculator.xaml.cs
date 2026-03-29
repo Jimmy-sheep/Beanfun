@@ -68,6 +68,8 @@ namespace Beanfun
 
         static class Scrolls
         {
+            public static Scroll StarShining = new Scroll();
+            public static Scroll SaveWorld = new Scroll();
             public static Scroll Destiny = new Scroll();
             public static Scroll Glory = new Scroll();
             public static Scroll Black = new Scroll();
@@ -80,6 +82,20 @@ namespace Beanfun
 
             static Scrolls()
             {
+                StarShining.Weapon = new ScrollStat(16, 21, 16, 21);
+                StarShining.Armor = new ScrollStat(0, 0, 11, 16);
+                StarShining.Accessory = new ScrollStat(0, 0, 11, 16);
+                StarShining.Weapon.RandomType = 1;
+                StarShining.Accessory.RandomType = StarShining.Weapon.RandomType;
+                StarShining.Armor.RandomType = StarShining.Weapon.RandomType;
+
+                SaveWorld.Weapon = new ScrollStat(15, 20, 15, 20);
+                SaveWorld.Armor = new ScrollStat(0, 0, 10, 15);
+                SaveWorld.Accessory = new ScrollStat(0, 0, 10, 15);
+                SaveWorld.Weapon.RandomType = 1;
+                SaveWorld.Accessory.RandomType = SaveWorld.Weapon.RandomType;
+                SaveWorld.Armor.RandomType = SaveWorld.Weapon.RandomType;
+
                 Destiny.Weapon = new ScrollStat(14, 20, 14, 20);
                 Destiny.Armor = new ScrollStat(0, 0, 9, 15);
                 Destiny.Accessory = new ScrollStat(0, 0, 9, 15);
@@ -172,6 +188,34 @@ namespace Beanfun
             calcStat();
         }
 
+        private void rb_StarShiningType_IsCheckedChanged(object sender, RoutedEventArgs e)
+        {
+            if (!InitFinish)
+                return;
+            Scrolls.StarShining.Weapon.RandomType = (byte)(
+                (bool)rb_StarShiningMin.IsChecked ? 0
+                : (bool)rb_StarShiningAverage.IsChecked ? 1
+                : 2
+            );
+            Scrolls.StarShining.Accessory.RandomType = Scrolls.StarShining.Weapon.RandomType;
+            Scrolls.StarShining.Armor.RandomType = Scrolls.StarShining.Weapon.RandomType;
+            calcStat();
+        }
+
+        private void rb_SaveWorldType_IsCheckedChanged(object sender, RoutedEventArgs e)
+        {
+            if (!InitFinish)
+                return;
+            Scrolls.SaveWorld.Weapon.RandomType = (byte)(
+                (bool)rb_SaveWorldMin.IsChecked ? 0
+                : (bool)rb_SaveWorldAverage.IsChecked ? 1
+                : 2
+            );
+            Scrolls.SaveWorld.Accessory.RandomType = Scrolls.SaveWorld.Weapon.RandomType;
+            Scrolls.SaveWorld.Armor.RandomType = Scrolls.SaveWorld.Weapon.RandomType;
+            calcStat();
+        }
+
         private void rb_DestinyType_IsCheckedChanged(object sender, RoutedEventArgs e)
         {
             if (!InitFinish)
@@ -204,11 +248,12 @@ namespace Beanfun
         {
             if (!InitFinish)
                 return;
-            lbl_StarForceMax.Content = (bool)cb_Superior.IsChecked ? "15" : "25";
+            lbl_StarForceMax.Content = (bool)cb_Superior.IsChecked ? "15" : "30";
             if ((bool)cb_Superior.IsChecked)
             {
                 rb_Lv160.Visibility = Visibility.Collapsed;
                 rb_Lv200.Visibility = Visibility.Collapsed;
+                rb_Lv250.Visibility = Visibility.Collapsed;
                 if (!(bool)rb_Lv150.IsChecked)
                 {
                     rb_Lv150.IsChecked = true;
@@ -219,6 +264,7 @@ namespace Beanfun
             {
                 rb_Lv160.Visibility = Visibility.Visible;
                 rb_Lv200.Visibility = Visibility.Visible;
+                rb_Lv250.Visibility = Visibility.Visible;
             }
             calcStat();
         }
@@ -254,6 +300,16 @@ namespace Beanfun
         private void t_StarForce_GotFocus(object sender, RoutedEventArgs e)
         {
             t_StarForce.Text = "";
+        }
+
+        private void t_StarShiningNum_GotFocus(object sender, RoutedEventArgs e)
+        {
+            t_StarShiningNum.Text = "";
+        }
+
+        private void t_SaveWorldNum_GotFocus(object sender, RoutedEventArgs e)
+        {
+            t_SaveWorldNum.Text = "";
         }
 
         private void t_DestinyNum_GotFocus(object sender, RoutedEventArgs e)
@@ -323,7 +379,8 @@ namespace Beanfun
                 : 4
             );
             short reqLev = (short)(
-                (bool)rb_Lv200.IsChecked ? 200
+                (bool)rb_Lv250.IsChecked ? 250
+                : (bool)rb_Lv200.IsChecked ? 200
                 : (bool)rb_Lv160.IsChecked ? 160
                 : 150
             );
@@ -378,6 +435,26 @@ namespace Beanfun
             catch
             {
                 starForce = 0;
+            }
+
+            byte starShiningNum;
+            try
+            {
+                starShiningNum = byte.Parse(t_StarShiningNum.Text);
+            }
+            catch
+            {
+                starShiningNum = 0;
+            }
+
+            byte saveWorldNum;
+            try
+            {
+                saveWorldNum = byte.Parse(t_SaveWorldNum.Text);
+            }
+            catch
+            {
+                saveWorldNum = 0;
             }
 
             byte destinyNum;
@@ -492,6 +569,26 @@ namespace Beanfun
 
             int atk =
                 baseATK
+                + starShiningNum
+                    * (
+                        eqpTyp == 0 || eqpTyp == 4
+                            ? Scrolls.StarShining.Weapon.Atk
+                            : (
+                                eqpTyp == 3
+                                    ? Scrolls.StarShining.Accessory.Atk
+                                    : Scrolls.StarShining.Armor.Atk
+                            )
+                    )
+                + saveWorldNum
+                    * (
+                        eqpTyp == 0 || eqpTyp == 4
+                            ? Scrolls.SaveWorld.Weapon.Atk
+                            : (
+                                eqpTyp == 3
+                                    ? Scrolls.SaveWorld.Accessory.Atk
+                                    : Scrolls.SaveWorld.Armor.Atk
+                            )
+                    )
                 + destinyNum
                     * (
                         eqpTyp == 0 || eqpTyp == 4
@@ -623,7 +720,7 @@ namespace Beanfun
                 + scrollStat;
 
             Dictionary<int, int> echantStats;
-            for (byte i = 0; i < starForce; i++)
+            for (byte i = 1; i <= starForce; i++)
             {
                 echantStats = getStarForceStats(superior, eqpTyp, i, atk, reqLev);
                 stat += echantStats[1];
@@ -652,41 +749,41 @@ namespace Beanfun
                 // 尊貴裝
                 switch (starForce)
                 {
-                    case 0:
+                    case 1:
                         stats.Remove(1);
                         stats.Add(1, 19);
                         break;
-                    case 1:
+                    case 2:
                         stats.Remove(1);
                         stats.Add(1, 20);
                         break;
-                    case 2:
+                    case 3:
                         stats.Remove(1);
                         stats.Add(1, 22);
                         break;
-                    case 3:
+                    case 4:
                         stats.Remove(1);
                         stats.Add(1, 25);
                         break;
-                    case 4:
+                    case 5:
                         stats.Remove(1);
                         stats.Add(1, 29);
                         break;
-                    case 5:
                     case 6:
                     case 7:
                     case 8:
                     case 9:
-                        stats.Remove(2);
-                        stats.Add(2, starForce + 4);
-                        break;
                     case 10:
+                        stats.Remove(2);
+                        stats.Add(2, starForce + 3);
+                        break;
                     case 11:
                     case 12:
                     case 13:
                     case 14:
+                    case 15:
                         stats.Remove(2);
-                        stats.Add(2, 15 + 2 * (starForce - 10));
+                        stats.Add(2, 15 + 2 * (starForce - 11));
                         break;
                 }
             }
@@ -696,15 +793,211 @@ namespace Beanfun
 
                 // 屬性
                 int allStats;
-                if (starForce >= 0 && starForce < 5)
+                if (starForce >= 1 && starForce <= 5)
                 {
                     allStats = 2;
                 }
-                else if (starForce >= 5 && starForce < 15)
+                else if (starForce >= 6 && starForce <= 15)
                 {
                     allStats = 3;
                 }
-                else if (starForce < 22)
+                else if (starForce <= 22)
+                {
+                    if (reqLev >= 250)
+                        allStats = 17;
+                    else if (reqLev >= 200)
+                        allStats = 15;
+                    else if (reqLev >= 160)
+                        allStats = 13;
+                    else
+                        allStats = 11;
+                }
+                else
+                {
+                    allStats = 0;
+                }
+                stats.Remove(1);
+                stats.Add(1, allStats);
+
+                // 攻擊力
+                if (starForce <= 15)
+                {
+                    stats.Remove(2);
+                    stats.Add(2, (int)Math.Floor(atk / 50.0D) + 1);
+                }
+                else
+                {
+                    int value = 0;
+                    switch (starForce)
+                    {
+                        case 16:
+                            if (reqLev >= 250)
+                                value = 16;
+                            else if (reqLev >= 200)
+                                value = 13;
+                            else if (reqLev >= 160)
+                                value = 9;
+                            else
+                                value = 8;
+                            break;
+                        case 17:
+                            if (reqLev >= 250)
+                                value = 16;
+                            else if (reqLev >= 200)
+                                value = 13;
+                            else
+                                value = 9;
+                            break;
+                        case 18:
+                            if (reqLev >= 250)
+                                value = 17;
+                            else if (reqLev >= 200)
+                                value = 14;
+                            else if (reqLev >= 160)
+                                value = 10;
+                            else
+                                value = 9;
+                            break;
+                        case 19:
+                            if (reqLev >= 250)
+                                value = 17;
+                            else if (reqLev >= 200)
+                                value = 14;
+                            else if (reqLev >= 160)
+                                value = 11;
+                            else
+                                value = 10;
+                            break;
+                        case 20:
+                            if (reqLev >= 250)
+                                value = 18;
+                            else if (reqLev >= 200)
+                                value = 15;
+                            else if (reqLev >= 160)
+                                value = 12;
+                            else
+                                value = 11;
+                            break;
+                        case 21:
+                            if (reqLev >= 250)
+                                value = 19;
+                            else if (reqLev >= 200)
+                                value = 16;
+                            else if (reqLev >= 160)
+                                value = 13;
+                            else
+                                value = 12;
+                            break;
+                        case 22:
+                            if (reqLev >= 250)
+                                value = 20;
+                            else if (reqLev >= 200)
+                                value = 17;
+                            else if (reqLev >= 160)
+                                value = 14;
+                            else
+                                value = 13;
+                            break;
+                        case 23:
+                            if (reqLev >= 250)
+                                value = 0;
+                            else if (reqLev >= 200)
+                                value = 34;
+                            else if (reqLev >= 160)
+                                value = 32;
+                            else
+                                value = 31;
+                            break;
+                        case 24:
+                            if (reqLev >= 250)
+                                value = 0;
+                            else if (reqLev >= 200)
+                                value = 35;
+                            else if (reqLev >= 160)
+                                value = 33;
+                            else
+                                value = 32;
+                            break;
+                        case 25:
+                            if (reqLev >= 250)
+                                value = 0;
+                            else if (reqLev >= 200)
+                                value = 36;
+                            else if (reqLev >= 160)
+                                value = 34;
+                            else
+                                value = 33;
+                            break;
+                        case 26:
+                            if (reqLev >= 250)
+                                value = 0;
+                            else if (reqLev >= 200)
+                                value = 37;
+                            else if (reqLev >= 160)
+                                value = 35;
+                            else
+                                value = 34;
+                            break;
+                        case 27:
+                            if (reqLev >= 250)
+                                value = 0;
+                            else if (reqLev >= 200)
+                                value = 38;
+                            else if (reqLev >= 160)
+                                value = 36;
+                            else
+                                value = 35;
+                            break;
+                        case 28:
+                            if (reqLev >= 250)
+                                value = 0;
+                            else if (reqLev >= 200)
+                                value = 39;
+                            else if (reqLev >= 160)
+                                value = 37;
+                            else
+                                value = 36;
+                            break;
+                        case 29:
+                            if (reqLev >= 250)
+                                value = 0;
+                            else if (reqLev >= 200)
+                                value = 40;
+                            else if (reqLev >= 160)
+                                value = 38;
+                            else
+                                value = 37;
+                            break;
+                        case 30:
+                            if (reqLev >= 250)
+                                value = 0;
+                            else if (reqLev >= 200)
+                                value = 41;
+                            else if (reqLev >= 160)
+                                value = 39;
+                            else
+                                value = 38;
+                            break;
+                    }
+                    stats.Remove(2);
+                    stats.Add(2, value);
+                }
+            }
+            else
+            {
+                // 其他裝備
+
+                // 屬性
+                int allStats;
+                if (starForce >= 1 && starForce <= 5)
+                {
+                    allStats = 2;
+                }
+                else if (starForce >= 6 && starForce <= 15)
+                {
+                    allStats = 3;
+                }
+                else if (starForce <= 22)
                 {
                     if (reqLev >= 200)
                         allStats = 15;
@@ -721,199 +1014,52 @@ namespace Beanfun
                 stats.Add(1, allStats);
 
                 // 攻擊力
-                if (starForce < 15)
-                {
-                    stats.Remove(2);
-                    stats.Add(2, (int)Math.Floor(atk / 50.0D) + 1);
-                }
-                else
-                {
-                    int value = 0;
-                    switch (starForce)
-                    {
-                        case 15:
-                            if (reqLev >= 200)
-                                value = 13;
-                            else if (reqLev >= 160)
-                                value = 9;
-                            else
-                                value = 8;
-                            break;
-                        case 16:
-                            if (reqLev >= 200)
-                                value = 13;
-                            else
-                                value = 9;
-                            break;
-                        case 17:
-                            if (reqLev >= 200)
-                                value = 14;
-                            else if (reqLev >= 160)
-                                value = 10;
-                            else
-                                value = 9;
-                            break;
-                        case 18:
-                            if (reqLev >= 200)
-                                value = 14;
-                            else if (reqLev >= 160)
-                                value = 11;
-                            else
-                                value = 10;
-                            break;
-                        case 19:
-                            if (reqLev >= 200)
-                                value = 15;
-                            else if (reqLev >= 160)
-                                value = 12;
-                            else
-                                value = 11;
-                            break;
-                        case 20:
-                            if (reqLev >= 200)
-                                value = 16;
-                            else if (reqLev >= 160)
-                                value = 13;
-                            else
-                                value = 12;
-                            break;
-                        case 21:
-                            if (reqLev >= 200)
-                                value = 17;
-                            else if (reqLev >= 160)
-                                value = 14;
-                            else
-                                value = 13;
-                            break;
-                        case 22:
-                            if (reqLev >= 200)
-                                value = 34;
-                            else if (reqLev >= 160)
-                                value = 32;
-                            else
-                                value = 31;
-                            break;
-                        case 23:
-                            if (reqLev >= 200)
-                                value = 35;
-                            break;
-                    }
-                    stats.Remove(2);
-                    stats.Add(2, value);
-                }
-            }
-            else
-            {
-                // 其他裝備
-                int allStats;
-                if (starForce >= 0 && starForce < 5)
-                {
-                    allStats = 2;
-                }
-                else if (starForce >= 5 && starForce < 15)
-                {
-                    allStats = 3;
-                }
-                else if (starForce < 22)
-                {
-                    if (reqLev >= 200)
-                        allStats = 15;
-                    else if (reqLev >= 160)
-                        allStats = 13;
-                    else
-                        allStats = 11;
-                }
-                else
-                {
-                    allStats = 0;
-                }
-                stats.Remove(1);
-                stats.Add(1, allStats);
-
                 if (starForce >= 15)
                 {
                     int value = 0;
                     switch (starForce)
                     {
-                        case 15:
-                            if (reqLev >= 200)
-                                value = 12;
-                            else if (reqLev >= 160)
-                                value = 10;
-                            else
-                                value = 9;
-                            break;
                         case 16:
-                            if (reqLev >= 200)
-                                value = 13;
-                            else if (reqLev >= 160)
-                                value = 11;
-                            else
-                                value = 10;
-                            break;
                         case 17:
-                            if (reqLev >= 200)
-                                value = 14;
-                            else if (reqLev >= 160)
-                                value = 12;
-                            else
-                                value = 11;
-                            break;
                         case 18:
-                            if (reqLev >= 200)
-                                value = 15;
-                            else if (reqLev >= 160)
-                                value = 13;
-                            else
-                                value = 12;
-                            break;
                         case 19:
-                            if (reqLev >= 200)
-                                value = 16;
-                            else if (reqLev >= 160)
-                                value = 14;
-                            else
-                                value = 13;
-                            break;
                         case 20:
-                            if (reqLev >= 200)
-                                value = 17;
-                            else if (reqLev >= 160)
-                                value = 15;
-                            else
-                                value = 14;
-                            break;
                         case 21:
-                            if (reqLev >= 200)
-                                value = 19;
+                            if (reqLev >= 250)
+                                value = starForce - 2;
+                            else if (reqLev >= 200)
+                                value = starForce - 3;
                             else if (reqLev >= 160)
-                                value = 17;
+                                value = starForce - 6;
                             else
-                                value = 16;
+                                value = starForce - 7;
                             break;
                         case 22:
-                            if (reqLev >= 200)
-                                value = 21;
-                            else if (reqLev >= 160)
-                                value = 19;
-                            else
-                                value = 18;
-                            break;
                         case 23:
-                            if (reqLev >= 200)
-                                value = 23;
-                            else if (reqLev >= 160)
-                                value = 21;
-                            else
-                                value = 20;
-                            break;
                         case 24:
-                            if (reqLev >= 200)
-                                value = 25;
+                        case 25:
+                            if (reqLev >= 250)
+                                value = 21 + 2 * (starForce - 22);
+                            else if (reqLev >= 200)
+                                value = 19 + 2 * (starForce - 22);
                             else if (reqLev >= 160)
-                                value = 23;
+                                value = 17 + 2 * (starForce - 22);
                             else
-                                value = 22;
+                                value = 16 + 2 * (starForce - 22);
+                            break;
+                        case 26:
+                        case 27:
+                        case 28:
+                        case 29:
+                        case 30:
+                            if (reqLev >= 250)
+                                value = starForce + 2;
+                            else if (reqLev >= 200)
+                                value = starForce;
+                            else if (reqLev >= 160)
+                                value = starForce - 2;
+                            else
+                                value = starForce - 3;
                             break;
                     }
                     stats.Remove(2);
@@ -924,22 +1070,14 @@ namespace Beanfun
                     int value = 0;
                     switch (starForce)
                     {
-                        case 4:
-                        case 6:
-                        case 8:
-                        case 10:
-                        case 12:
-                            value = 1;
-                            break;
+                        case 5:
+                        case 7:
+                        case 9:
+                        case 11:
                         case 13:
-                            if (reqLev >= 200)
-                                value = 1;
-                            break;
                         case 14:
-                            if (reqLev >= 200)
-                                value = 1;
-                            else
-                                value = 2;
+                        case 15:
+                            value = 1;
                             break;
                     }
                     stats.Remove(2);

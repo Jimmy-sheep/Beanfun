@@ -215,6 +215,8 @@
   <system:String x:Key="StarForce">套用 </system:String>
   <system:String x:Key="StarForceSplit">星強化（最多</system:String>
   <system:String x:Key="StarsInFused">星）</system:String>
+  <system:String x:Key="ScrollStarShining">星彩卷</system:String>
+  <system:String x:Key="ScrollSaveWorld">救世卷</system:String>
   <system:String x:Key="ScrollDestiny">命運卷</system:String>
   <system:String x:Key="ScrollGlory">榮耀卷</system:String>
   <system:String x:Key="ScrollBlack">黑暗卷</system:String>
