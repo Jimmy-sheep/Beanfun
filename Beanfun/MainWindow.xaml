@@ -101,7 +101,7 @@
 			C660.9,292.4,660.9,288.4,676.9,288.4z"
           />
           <Path
-            Margin="5 5 5 0"
+            Margin="5,5,5,0"
             Fill="{Binding ElementName=LogoIcon, Path=Fill}"
             Stretch="{Binding ElementName=LogoIcon, Path=Stretch}"
             RenderTransformOrigin="0.5,0.5"
@@ -120,7 +120,7 @@
             Click="btn_About_Click"
             MouseLeave="btn_About_MouseLeave"
             IsKeyboardFocusedChanged="btn_About_IsKeyboardFocusedChanged"
-            Content="&#xE91C;"
+            Content="&#xE946;"
             FontFamily="{StaticResource SegoeMDL2}"
           />
           <Button
@@ -134,7 +134,7 @@
             Click="btn_Setting_Click"
             MouseLeave="btn_Setting_MouseLeave"
             IsKeyboardFocusedChanged="btn_Setting_IsKeyboardFocusedChanged"
-            Content="&#xEF58;"
+            Content="&#xE713;"
             FontFamily="{StaticResource SegoeMDL2}"
           />
           <Button

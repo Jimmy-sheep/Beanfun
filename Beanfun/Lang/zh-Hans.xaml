@@ -44,27 +44,33 @@
   <system:String x:Key="AppName">缤放</system:String>
   <system:String x:Key="About">关于</system:String>
   <system:String x:Key="Settings">设置</system:String>
+  <system:String x:Key="Minimize">最小化</system:String>
   <system:String x:Key="Close">关闭</system:String>
+  <system:String x:Key="Version">版本</system:String>
   <system:String x:Key="CheckUpdate">检测更新</system:String>
   <system:String x:Key="AboutText"
     >&lt;R&gt;本程序&lt;B&gt;&lt;R Foreground="Red"&gt;不是&lt;/R&gt;游戏橘子数位科技&lt;/B&gt;开发的官方客户端程序&lt;L/&gt;&lt;L/&gt;关于游戏账号使用第三方的方式登录请再三斟酌并且请确认您下载当前程序的途径是否安全&lt;L/&gt;&lt;L/&gt;程序使用部分BeanfunLogin的代码&lt;L/&gt;&lt;/R&gt;</system:String
   >
   <system:String x:Key="Contact">联系开发者</system:String>
   <system:String x:Key="Email">发送邮件</system:String>
+  <system:String x:Key="Back">返回</system:String>
   <system:String x:Key="Feedback">缤放 反馈/建议</system:String>
   <system:String x:Key="FeedbackText">软件版本: {0}%0d反馈/建议信息:%0d</system:String>
   <system:String x:Key="AccountList">帐号列表</system:String>
   <system:String x:Key="GameChange">更换游戏</system:String>
   <system:String x:Key="GameStart">启动游戏</system:String>
+  <system:String x:Key="Logout">登出</system:String>
+  <system:String x:Key="Tools">工具</system:String>
   <system:String x:Key="GashRemain">乐豆: {0} 点</system:String>
-  <system:String x:Key="GashRemainInGame"> (游戏内 {0})</system:String>
+  <system:String x:Key="GashRemainInGame">(游戏内 {0})</system:String>
   <system:String x:Key="GashRefresh">更新点数</system:String>
   <system:String x:Key="GashRecharge">充值与购点</system:String>
-  <system:String x:Key="AppGashRecharge">兑换beanfun!App乐豆点</system:String>
   <system:String x:Key="MemberCenter">会员中心</system:String>
+  <system:String x:Key="CustomerService">客服中心</system:String>
   <system:String x:Key="RightClickMenu">右键开启菜单</system:String>
   <system:String x:Key="AccountBanned">账号已锁定</system:String>
   <system:String x:Key="DoubleClickCopy">双击复制账号</system:String>
+  <system:String x:Key="DragDropSort">拖拉来排序</system:String>
   <system:String x:Key="CopyGameAccount">复制游戏账号</system:String>
   <system:String x:Key="ChangeAccountName">编辑游戏账号</system:String>
   <system:String x:Key="ChangeAccountPassword">修改游戏账号</system:String>
@@ -102,9 +108,11 @@
   <system:String x:Key="MsgDeleteAccount"
     >即将删除账号「{0}」，此操作不可恢复，是否确定要删除？</system:String
   >
-  <system:String x:Key="MsgLogging">正在登录,请稍等...</system:String>
+  <system:String x:Key="MsgLogging">正在登录，请稍等...</system:String>
+  <system:String x:Key="Cancel">取消</system:String>
   <system:String x:Key="ManageAccount">管理账号</system:String>
   <system:String x:Key="Taiwan">台湾</system:String>
+  <system:String x:Key="HongKong">香港</system:String>
   <system:String x:Key="Account">账号</system:String>
   <system:String x:Key="Remark">备注</system:String>
   <system:String x:Key="RememberAuthInfo">记住验证资料</system:String>
@@ -112,6 +120,8 @@
   <system:String x:Key="Add">添加</system:String>
   <system:String x:Key="Edit">编辑</system:String>
   <system:String x:Key="Delete">删除</system:String>
+  <system:String x:Key="Yes">是</system:String>
+  <system:String x:Key="No">否</system:String>
   <system:String x:Key="MsgDeleteAccountMng"
     >即将删除{0}，此操作不可恢复，是否确定要删除？</system:String
   >
@@ -119,13 +129,14 @@
   <system:String x:Key="MsgDeleteAccountSingle">账号「{0}」</system:String>
   <system:String x:Key="RefreshQRCode">重新加载</system:String>
   <system:String x:Key="BackRegularLogin">返回一般登录</system:String>
+  <system:String x:Key="UpdateChannel">更新通道</system:String>
   <system:String x:Key="Stable">稳定版</system:String>
   <system:String x:Key="Development">测试版</system:String>
   <system:String x:Key="ThemeColor">主题颜色</system:String>
-  <system:String x:Key="AutoCheckUpdate">有新版本时提示更新</system:String>
-  <system:String x:Key="RunAfterLogin">登录完成后运行游戏</system:String>
+  <system:String x:Key="AutoCheckUpdate">版本更新提示</system:String>
+  <system:String x:Key="RunAfterLogin">登录后运行游戏</system:String>
   <system:String x:Key="MinimizeToTaskbar">最小化到任务栏</system:String>
-  <system:String x:Key="DisableHardwareAcceleration">关闭硬件加速（降低 GPU 使用）</system:String>
+  <system:String x:Key="DisableHardwareAcceleration">关闭硬件加速</system:String>
   <TextBlock x:Key="DisableHardwareAccelerationTip" TextWrapping="Wrap">
     <Run Text="以软件渲染界面与内嵌网页，可减轻显卡负载与待机功耗；画面可能较不流畅、较耗 CPU。" />
     <LineBreak />
@@ -133,7 +144,7 @@
   </TextBlock>
   <system:String x:Key="MsgRestartForHardwareAccelTitle">需要重新启动</system:String>
   <system:String x:Key="MsgRestartForHardwareAccel"
-    >已变更硬件加速相关设置。请完全关闭 Beanfun 后再打开，主窗口才会套用 WPF 软件渲染。</system:String
+    >已变更硬件加速相关设置。请完全关闭缤放后再打开，主窗口才会套用 WPF 软件渲染。</system:String
   >
   <system:String x:Key="Game">游戏</system:String>
   <system:String x:Key="GamePath">游戏路径</system:String>
@@ -178,6 +189,7 @@
   <system:String x:Key="tbBeanfunPassword">密码(不储存则留空)</system:String>
   <system:String x:Key="tbBeanfunAuthInfo">认证信息(不储存则留空)</system:String>
   <system:String x:Key="ServiceAccountDisplayName">使用者名称:</system:String>
+  <system:String x:Key="IAgree">我同意</system:String>
   <system:String x:Key="TermsOfService">服务条款</system:String>
   <system:String x:Key="SystemInfo">系统信息</system:String>
   <system:String x:Key="MsgDisplayNameNeed">请输入使用者名称！</system:String>
@@ -197,25 +209,38 @@
   <system:String x:Key="CopyFinished">复制完成</system:String>
   <system:String x:Key="CopyFailed">复制失败</system:String>
   <system:String x:Key="EquipStarForceCaculator">装备卷轴星力计算器</system:String>
-  <system:String x:Key="EquipType">装备分类:</system:String>
+  <system:String x:Key="EquipType">装备分类：</system:String>
+  <system:String x:Key="Weapon">武器</system:String>
+  <system:String x:Key="Glove">手套</system:String>
+  <system:String x:Key="Armor">其他防具</system:String>
   <system:String x:Key="Accessory">饰品</system:String>
   <system:String x:Key="Heart">心脏</system:String>
   <system:String x:Key="HeartNotice">※卷轴属性套用武器卷</system:String>
+  <system:String x:Key="ReqLvl">要求等级：</system:String>
   <system:String x:Key="Superior">极真</system:String>
-  <system:String x:Key="Stat_">属性:</system:String>
-  <system:String x:Key="Atk_Matk_">攻击力/魔法攻击力:</system:String>
+  <system:String x:Key="Stat_">属性：</system:String>
+  <system:String x:Key="Atk_Matk_">攻击力/魔法攻击力：</system:String>
   <system:String x:Key="StarForce">适用</system:String>
   <system:String x:Key="StarForceSplit">星强化（最高</system:String>
   <system:String x:Key="StarsInFused">星）</system:String>
   <system:String x:Key="ScrollDestiny">命运卷</system:String>
   <system:String x:Key="ScrollGlory">荣耀卷</system:String>
+  <system:String x:Key="ScrollBlack">黑暗卷</system:String>
+  <system:String x:Key="ScrollV">V卷</system:String>
+  <system:String x:Key="ScrollX">X卷</system:String>
+  <system:String x:Key="ScrollRed">Red卷</system:String>
   <system:String x:Key="ScrollJiDian">极电卷</system:String>
+  <system:String x:Key="ScrollSuMin">宿命卷</system:String>
   <system:String x:Key="ScrollChuanShuo">传说卷</system:String>
   <system:String x:Key="ScrollOthers">其他卷属性</system:String>
+  <system:String x:Key="ScrollValueMin">最低</system:String>
+  <system:String x:Key="ScrollValueAverage">平均</system:String>
+  <system:String x:Key="ScrollValueMax">最高</system:String>
   <system:String x:Key="Sheet">张</system:String>
   <system:String x:Key="Stat">属性</system:String>
   <system:String x:Key="Atk_Matk">攻击力/魔法攻击力</system:String>
   <system:String x:Key="GameSelected">选择游戏</system:String>
+  <system:String x:Key="ToolBox">工具箱</system:String>
   <system:String x:Key="ConvoyOperation">车队操作</system:String>
   <system:String x:Key="ConvoyManage">车队管理</system:String>
   <system:String x:Key="ConvoyRank">车队排名</system:String>
@@ -223,14 +248,14 @@
   <system:String x:Key="RiderSearch">车手搜索</system:String>
   <system:String x:Key="CreateConvoy">建立车队</system:String>
   <system:String x:Key="LeaveConvoy">离开车队</system:String>
-  <system:String x:Key="BeanfunRegionSelected">请选择Beanfun区域</system:String>
+  <system:String x:Key="GamaniaRegionSelected">请选择游戏橘子地区</system:String>
   <system:String x:Key="RegionSelected">请选择使用区域</system:String>
   <system:String x:Key="Recycling">回收枫之谷文件夹空间</system:String>
   <system:String x:Key="MsgRecycling">是否需要回收空间(更新游戏时请不要使用此功能)？</system:String>
   <system:String x:Key="MsgRecyclingDone">枫之谷文件夹空间回收完成</system:String>
   <system:String x:Key="PlayerReport">外挂举报(GM上线核实)</system:String>
   <system:String x:Key="MsgPlayerReport"
-    >「新枫之谷」即时举报功能需要登录台湾Beanfun账号，不支持香港Beanfun账号，您可以自行注册一个台湾Beanfun账号用来举报。</system:String
+    >「新枫之谷」即时举报功能需要登录台湾Beanfun账号，不支持香港游戏橘子账号，您可以自行注册一个台湾Beanfun账号用来举报。</system:String
   >
   <system:String x:Key="VideoReport">皇家纠察队(录屏举报)</system:String>
   <system:String x:Key="ServiceAccountInfo">账号详情</system:String>
@@ -238,6 +263,7 @@
   <system:String x:Key="Name">名称</system:String>
   <system:String x:Key="AuthType">验证方式</system:String>
   <system:String x:Key="Status">状态</system:String>
+  <system:String x:Key="Normal">正常</system:String>
   <system:String x:Key="Banned">锁定</system:String>
   <system:String x:Key="AccountEstablished">账号已经建立了</system:String>
   <system:String x:Key="Days">天</system:String>

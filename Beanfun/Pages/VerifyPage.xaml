@@ -20,7 +20,7 @@
   </Page.Resources>
 
   <Grid>
-    <StackPanel Margin="0 30 0 0">
+    <StackPanel Margin="0,30,0,0">
       <StackPanel Background="#7FFFFFFF">
         <StackPanel Margin="10">
           <DockPanel>

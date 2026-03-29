@@ -20,9 +20,11 @@ namespace Beanfun
         {
             InitializeComponent();
 
-            List<Language> languageList = new List<Language>();
-            languageList.Add(new Language { Name = "zh-Hant", DisplayName = "中文(繁體)" });
-            languageList.Add(new Language { Name = "zh-Hans", DisplayName = "中文(简体)" });
+            List<Language> languageList = new List<Language>
+            {
+                new Language { Name = "zh-Hant", DisplayName = "中文(繁體)" },
+                new Language { Name = "zh-Hans", DisplayName = "中文(简体)" },
+            };
             cb_Language.ItemsSource = languageList;
             cb_Language.DisplayMemberPath = "DisplayName";
             cb_Language.SelectedValuePath = "Name";

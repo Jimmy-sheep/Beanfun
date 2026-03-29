@@ -38,16 +38,8 @@ namespace Beanfun
 
         private void RegAcc_Click(object sender, RoutedEventArgs e)
         {
-            string url;
-            if (App.LoginRegion == "TW")
-            {
-                url = "https://tw.beanfun.com/TW/signup/Join_beanfun_signup.aspx?service=999999_T0";
-            }
-            else
-            {
-                url =
-                    "https://bfweb.hk.beanfun.com/beanfun_web_ap/signup/preregistration.aspx?service=999999_T0";
-            }
+            string url = "https://tw.beanfun.com//beanfun_block/signup_gateway.aspx";
+
             new WebBrowser(url).Show();
         }
 

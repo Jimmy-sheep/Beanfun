@@ -14,8 +14,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using IniParser;
 using IniParser.Model;
+using IniParser.Parser;
 using Microsoft.Win32;
 using Newtonsoft.Json.Linq;
 using Utility.ModifyRegistry;
@@ -252,9 +252,6 @@ namespace Beanfun
             color.B = (byte)Math.Max(color.B - 50, 0);
             color.A = 0xFF;
             this.BorderBrush = new SolidColorBrush(color);
-
-            // Update theme color resource for ListBox selection
-            Application.Current.Resources["ThemeColorBrush"] = new SolidColorBrush(color);
             bool isLightMode = isLightColor();
             if (compositor != null)
             {
@@ -678,8 +675,8 @@ namespace Beanfun
                     )
                 );
 
-                StringIniParser sip = new StringIniParser();
-                INIData = sip.ParseString(res);
+                IniDataParser idp = new IniDataParser();
+                INIData = idp.Parse(res);
 
                 res = Encoding.UTF8.GetString(
                     wc.DownloadData(
@@ -1052,16 +1049,12 @@ namespace Beanfun
                     btn_Region.Content = "TW";
                     btn_Region.ToolTip = TryFindResource("ChangHKRegion") as string;
                     loginPage.id_pass.btn_QRCode.IsEnabled = true;
-
-                    accountList.btn_Deposite.Visibility = Visibility.Visible;
                 }
                 else
                 {
                     btn_Region.Content = "HK";
                     btn_Region.ToolTip = TryFindResource("ChangTWRegion") as string;
                     loginPage.id_pass.btn_QRCode.IsEnabled = false;
-
-                    accountList.btn_Deposite.Visibility = Visibility.Collapsed;
                 }
             }
             catch { }
@@ -1477,7 +1470,7 @@ namespace Beanfun
         // Login completed.
         private void totpWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            Console.WriteLine("loginWorker end");
+            Console.WriteLine("totpWorker end");
             if (e != null && e.Error != null)
             {
                 errexit(e.Error.Message, 1);
@@ -2086,6 +2079,7 @@ namespace Beanfun
             accountList.btnGetOtp.Content = TryFindResource("GetOtp") as string;
             if (e.Error != null)
             {
+                Console.WriteLine("e.Error != null");
                 errexit(e.Error.Message, 2, TryFindResource("GetOtpFailed") as string);
             }
             else
@@ -2094,6 +2088,7 @@ namespace Beanfun
 
                 if (index == -1)
                 {
+                    Console.WriteLine("else index == -1");
                     errexit(this.bfClient.errmsg, 2, TryFindResource("GetOtpFailed") as string);
                 }
                 else

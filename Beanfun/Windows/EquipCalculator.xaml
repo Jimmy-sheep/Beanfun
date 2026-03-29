@@ -13,51 +13,74 @@
 >
   <Grid>
     <DockPanel Margin="5">
-      <Border Background="#7F000000">
+      <Border Background="#DF393D47">
         <StackPanel Margin="5">
-          <Label Content="{DynamicResource EquipType}" Foreground="White" />
-          <StackPanel Orientation="Horizontal">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label Content="{DynamicResource EquipType}" Foreground="White" />
+            <CheckBox
+              x:Name="cb_Superior"
+              Content="{DynamicResource Superior}"
+              Foreground="LightGreen"
+              HorizontalAlignment="Right"
+              VerticalContentAlignment="Center"
+              Margin="3"
+              Visibility="Collapsed"
+              Checked="cb_Superior_IsCheckedChanged"
+              Unchecked="cb_Superior_IsCheckedChanged"
+              Grid.Column="1"
+            />
+          </Grid>
+          <StackPanel Orientation="Horizontal" Margin="0,3">
             <RadioButton
               IsChecked="True"
               x:Name="rb_Weapon"
+              Content="{DynamicResource Weapon}"
+              Foreground="White"
+              Margin="3"
               GroupName="rb_EqpTyp"
               VerticalContentAlignment="Center"
               Checked="rb_EqpTyp_IsCheckedChanged"
-            >
-              <Label Foreground="White" Content="{DynamicResource Weapon}" />
-            </RadioButton>
+            />
             <RadioButton
               x:Name="rb_Glove"
               GroupName="rb_EqpTyp"
+              Content="{DynamicResource Glove}"
+              Foreground="White"
+              Margin="3"
               VerticalContentAlignment="Center"
               Checked="rb_EqpTyp_IsCheckedChanged"
-            >
-              <Label Foreground="White" Content="{DynamicResource Glove}" />
-            </RadioButton>
+            />
             <RadioButton
               x:Name="rb_Armor"
               GroupName="rb_EqpTyp"
+              Content="{DynamicResource Armor}"
+              Foreground="White"
+              Margin="3"
               VerticalContentAlignment="Center"
               Checked="rb_EqpTyp_IsCheckedChanged"
-            >
-              <Label Foreground="White" Content="{DynamicResource Armor}" />
-            </RadioButton>
+            />
             <RadioButton
               x:Name="rb_Accessory"
               GroupName="rb_EqpTyp"
+              Content="{DynamicResource Accessory}"
+              Foreground="White"
+              Margin="3"
               VerticalContentAlignment="Center"
               Checked="rb_EqpTyp_IsCheckedChanged"
-            >
-              <Label Foreground="White" Content="{DynamicResource Accessory}" />
-            </RadioButton>
+            />
             <RadioButton
               x:Name="rb_Heart"
               GroupName="rb_EqpTyp"
+              Content="{DynamicResource Heart}"
+              Foreground="White"
+              Margin="3"
               VerticalContentAlignment="Center"
               Checked="rb_EqpTyp_IsCheckedChanged"
-            >
-              <Label Foreground="White" Content="{DynamicResource Heart}" />
-            </RadioButton>
+            />
           </StackPanel>
           <Label
             x:Name="lbl_HeartNotice"
@@ -65,45 +88,43 @@
             Foreground="Red"
             Visibility="Collapsed"
           />
-          <StackPanel Orientation="Horizontal">
-            <Label Content="REQ LEV:" Foreground="Orange" />
+          <StackPanel Orientation="Horizontal" Margin="0,3">
+            <Label Content="{DynamicResource ReqLvl}" Foreground="Orange" />
             <RadioButton
               IsChecked="True"
               x:Name="rb_Lv150"
               GroupName="rb_ReqLev"
+              Content="150"
+              Foreground="Orange"
+              Margin="3"
               VerticalContentAlignment="Center"
               Checked="rb_ReqLev_IsCheckedChanged"
-            >
-              <Label Foreground="Orange">150</Label>
-            </RadioButton>
+            />
             <RadioButton
               x:Name="rb_Lv160"
               GroupName="rb_ReqLev"
+              Content="160"
+              Foreground="Orange"
+              Margin="3"
               VerticalContentAlignment="Center"
               Checked="rb_ReqLev_IsCheckedChanged"
-            >
-              <Label Foreground="Orange">160</Label>
-            </RadioButton>
+            />
             <RadioButton
               x:Name="rb_Lv200"
               GroupName="rb_ReqLev"
+              Content="200"
+              Foreground="Orange"
+              Margin="3"
               VerticalContentAlignment="Center"
               Checked="rb_ReqLev_IsCheckedChanged"
-            >
-              <Label Foreground="Orange">200</Label>
-            </RadioButton>
+            />
           </StackPanel>
-          <CheckBox
-            x:Name="cb_Superior"
-            Content="{DynamicResource Superior}"
-            Foreground="LightGreen"
-            Margin="0, 3"
-            Visibility="Collapsed"
-            Checked="cb_Superior_IsCheckedChanged"
-            Unchecked="cb_Superior_IsCheckedChanged"
-          />
-          <StackPanel Orientation="Horizontal" Margin="0, 3">
-            <Label Content="{DynamicResource Stat}" Foreground="White" VerticalAlignment="Center" />
+          <StackPanel Orientation="Horizontal" Margin="0,3">
+            <Label
+              Content="{DynamicResource Stat_}"
+              Foreground="White"
+              VerticalAlignment="Center"
+            />
             <Label Content="+" Foreground="LightBlue" VerticalAlignment="Center" />
             <Label
               x:Name="lbl_TotalStat"
@@ -145,10 +166,17 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="+" Foreground="LightGreen" VerticalAlignment="Center" />
+            <Label Content="+" Foreground="Gold" VerticalAlignment="Center" />
+            <Label
+              x:Name="lbl_AddedStat"
+              Content="0"
+              Foreground="Gold"
+              VerticalAlignment="Center"
+            />
+            <Label Content="+" Foreground="MediumPurple" VerticalAlignment="Center" />
             <TextBox
               x:Name="t_FlameStat"
-              Foreground="LightGreen"
+              Foreground="MediumPurple"
               MinWidth="30"
               TextChanged="calcStat_TextChanged"
               VerticalAlignment="Center"
@@ -168,7 +196,7 @@
                           <VisualBrush AlignmentX="Left" Stretch="None">
                             <VisualBrush.Visual>
                               <TextBlock
-                                Foreground="LightGreen"
+                                Foreground="MediumPurple"
                                 Padding="2,0"
                                 Background="Transparent"
                                 >0</TextBlock
@@ -182,16 +210,9 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="+" Foreground="LightBlue" VerticalAlignment="Center" />
-            <Label
-              x:Name="lbl_AddedStat"
-              Content="0"
-              Foreground="LightBlue"
-              VerticalAlignment="Center"
-            />
             <Label Content=")" Foreground="White" VerticalAlignment="Center" />
           </StackPanel>
-          <StackPanel Orientation="Horizontal" Margin="0, 3">
+          <StackPanel Orientation="Horizontal" Margin="0,3">
             <Label
               Content="{DynamicResource Atk_Matk_}"
               Foreground="White"
@@ -238,10 +259,12 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="+" Foreground="LightGreen" VerticalAlignment="Center" />
+            <Label Content="+" Foreground="Gold" VerticalAlignment="Center" />
+            <Label x:Name="lbl_AddedATK" Content="0" Foreground="Gold" VerticalAlignment="Center" />
+            <Label Content="+" Foreground="MediumPurple" VerticalAlignment="Center" />
             <TextBox
               x:Name="t_FlameATK"
-              Foreground="LightGreen"
+              Foreground="MediumPurple"
               MinWidth="30"
               TextChanged="calcStat_TextChanged"
               VerticalAlignment="Center"
@@ -261,7 +284,7 @@
                           <VisualBrush AlignmentX="Left" Stretch="None">
                             <VisualBrush.Visual>
                               <TextBlock
-                                Foreground="LightGreen"
+                                Foreground="MediumPurple"
                                 Padding="2,0"
                                 Background="Transparent"
                                 >0</TextBlock
@@ -275,16 +298,9 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="+" Foreground="LightBlue" VerticalAlignment="Center" />
-            <Label
-              x:Name="lbl_AddedATK"
-              Content="0"
-              Foreground="LightBlue"
-              VerticalAlignment="Center"
-            />
             <Label Content=")" Foreground="White" VerticalAlignment="Center" />
           </StackPanel>
-          <StackPanel Orientation="Horizontal" Margin="0, 3">
+          <StackPanel Orientation="Horizontal" Margin="0,3">
             <Label
               Content="{DynamicResource StarForce}"
               Foreground="White"
@@ -406,16 +422,56 @@
           />
         </StackPanel>
         <StackPanel>
-          <Label Content="{DynamicResource ScrollDestiny}" Height="32" />
-          <Label Content="{DynamicResource ScrollGlory}" Height="32" />
-          <Label Content="{DynamicResource ScrollBlack}" Height="32" />
-          <Label Content="{DynamicResource ScrollV}" Height="32" />
-          <Label Content="{DynamicResource ScrollX}" Height="32" />
-          <Label Content="{DynamicResource ScrollRed}" Height="32" />
-          <Label Content="{DynamicResource ScrollJiDian}" Height="32" />
-          <Label Content="{DynamicResource ScrollSuMin}" Height="32" />
-          <Label Content="{DynamicResource ScrollChuanShuo}" Height="32" />
-          <Label Content="{DynamicResource ScrollOthers}" Height="32" />
+          <Label
+            Content="{DynamicResource ScrollDestiny}"
+            Height="32"
+            VerticalContentAlignment="Center"
+          />
+          <Label
+            Content="{DynamicResource ScrollGlory}"
+            Height="32"
+            VerticalContentAlignment="Center"
+          />
+          <Label
+            Content="{DynamicResource ScrollBlack}"
+            Height="32"
+            VerticalContentAlignment="Center"
+          />
+          <Label
+            Content="{DynamicResource ScrollV}"
+            Height="32"
+            VerticalContentAlignment="Center"
+          />
+          <Label
+            Content="{DynamicResource ScrollX}"
+            Height="32"
+            VerticalContentAlignment="Center"
+          />
+          <Label
+            Content="{DynamicResource ScrollRed}"
+            Height="32"
+            VerticalContentAlignment="Center"
+          />
+          <Label
+            Content="{DynamicResource ScrollJiDian}"
+            Height="32"
+            VerticalContentAlignment="Center"
+          />
+          <Label
+            Content="{DynamicResource ScrollSuMin}"
+            Height="32"
+            VerticalContentAlignment="Center"
+          />
+          <Label
+            Content="{DynamicResource ScrollChuanShuo}"
+            Height="32"
+            VerticalContentAlignment="Center"
+          />
+          <Label
+            Content="{DynamicResource ScrollOthers}"
+            Height="32"
+            VerticalContentAlignment="Center"
+          />
         </StackPanel>
         <StackPanel>
           <DockPanel>
@@ -449,18 +505,24 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="{DynamicResource Sheet}" Height="32" />
+            <Label
+              Content="{DynamicResource Sheet}"
+              Height="32"
+              VerticalContentAlignment="Center"
+            />
             <RadioButton
               VerticalAlignment="Center"
               x:Name="rb_DestinyMin"
-              Content="{DynamicResource GloryMin}"
+              Content="{DynamicResource ScrollValueMin}"
+              Margin="3"
               GroupName="rb_DestinyType"
               Checked="rb_DestinyType_IsCheckedChanged"
             />
             <RadioButton
               VerticalAlignment="Center"
               x:Name="rb_DestinyAverage"
-              Content="{DynamicResource GloryAverage}"
+              Content="{DynamicResource ScrollValueAverage}"
+              Margin="3"
               GroupName="rb_DestinyType"
               Checked="rb_DestinyType_IsCheckedChanged"
               IsChecked="True"
@@ -468,7 +530,8 @@
             <RadioButton
               VerticalAlignment="Center"
               x:Name="rb_DestinyMax"
-              Content="{DynamicResource GloryMax}"
+              Content="{DynamicResource ScrollValueMax}"
+              Margin="3"
               GroupName="rb_DestinyType"
               Checked="rb_DestinyType_IsCheckedChanged"
             />
@@ -504,18 +567,24 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="{DynamicResource Sheet}" Height="32" />
+            <Label
+              Content="{DynamicResource Sheet}"
+              Height="32"
+              VerticalContentAlignment="Center"
+            />
             <RadioButton
               VerticalAlignment="Center"
               x:Name="rb_GloryMin"
-              Content="{DynamicResource GloryMin}"
+              Content="{DynamicResource ScrollValueMin}"
+              Margin="3"
               GroupName="rb_GloryType"
               Checked="rb_GloryType_IsCheckedChanged"
             />
             <RadioButton
               VerticalAlignment="Center"
               x:Name="rb_GloryAverage"
-              Content="{DynamicResource GloryAverage}"
+              Content="{DynamicResource ScrollValueAverage}"
+              Margin="3"
               GroupName="rb_GloryType"
               Checked="rb_GloryType_IsCheckedChanged"
               IsChecked="True"
@@ -523,7 +592,8 @@
             <RadioButton
               VerticalAlignment="Center"
               x:Name="rb_GloryMax"
-              Content="{DynamicResource GloryMax}"
+              Content="{DynamicResource ScrollValueMax}"
+              Margin="3"
               GroupName="rb_GloryType"
               Checked="rb_GloryType_IsCheckedChanged"
             />
@@ -559,7 +629,11 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="{DynamicResource Sheet}" Height="32" />
+            <Label
+              Content="{DynamicResource Sheet}"
+              Height="32"
+              VerticalContentAlignment="Center"
+            />
           </DockPanel>
           <DockPanel>
             <TextBox
@@ -592,7 +666,11 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="{DynamicResource Sheet}" Height="32" />
+            <Label
+              Content="{DynamicResource Sheet}"
+              Height="32"
+              VerticalContentAlignment="Center"
+            />
           </DockPanel>
           <DockPanel>
             <TextBox
@@ -625,7 +703,11 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="{DynamicResource Sheet}" Height="32" />
+            <Label
+              Content="{DynamicResource Sheet}"
+              Height="32"
+              VerticalContentAlignment="Center"
+            />
           </DockPanel>
           <DockPanel>
             <TextBox
@@ -658,7 +740,11 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="{DynamicResource Sheet}" Height="32" />
+            <Label
+              Content="{DynamicResource Sheet}"
+              Height="32"
+              VerticalContentAlignment="Center"
+            />
           </DockPanel>
           <DockPanel>
             <TextBox
@@ -691,7 +777,11 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="{DynamicResource Sheet}" Height="32" />
+            <Label
+              Content="{DynamicResource Sheet}"
+              Height="32"
+              VerticalContentAlignment="Center"
+            />
           </DockPanel>
           <DockPanel>
             <TextBox
@@ -724,7 +814,11 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="{DynamicResource Sheet}" Height="32" />
+            <Label
+              Content="{DynamicResource Sheet}"
+              Height="32"
+              VerticalContentAlignment="Center"
+            />
           </DockPanel>
           <DockPanel>
             <TextBox
@@ -757,12 +851,16 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="{DynamicResource Sheet}" Height="32" />
+            <Label
+              Content="{DynamicResource Sheet}"
+              Height="32"
+              VerticalContentAlignment="Center"
+            />
           </DockPanel>
           <DockPanel>
             <TextBox
               x:Name="t_ScrollStat"
-              MinWidth="35"
+              MinWidth="30"
               TextChanged="calcStat_TextChanged"
               VerticalAlignment="Center"
               GotFocus="t_ScrollStat_GotFocus"
@@ -790,10 +888,10 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="{DynamicResource Stat}" Height="32" />
+            <Label Content="{DynamicResource Stat}" Height="32" VerticalContentAlignment="Center" />
             <TextBox
               x:Name="t_ScrollATK"
-              MinWidth="35"
+              MinWidth="30"
               TextChanged="calcStat_TextChanged"
               VerticalAlignment="Center"
               GotFocus="t_ScrollATK_GotFocus"
@@ -821,7 +919,11 @@
                 </Style>
               </TextBox.Style>
             </TextBox>
-            <Label Content="{DynamicResource Atk_Matk}" Height="32" />
+            <Label
+              Content="{DynamicResource Atk_Matk}"
+              Height="32"
+              VerticalContentAlignment="Center"
+            />
           </DockPanel>
         </StackPanel>
       </DockPanel>

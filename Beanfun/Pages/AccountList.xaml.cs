@@ -249,11 +249,6 @@ namespace Beanfun
             }
         }
 
-        private void btn_Deposite_Click(object sender, RoutedEventArgs e)
-        {
-            new WebBrowser("https://m.beanfun.com/Deposite").Show();
-        }
-
         #region Drag and Drop Reorder
 
         private void ListBox_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

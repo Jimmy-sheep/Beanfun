@@ -43,17 +43,9 @@ namespace Beanfun
             App.MainWnd.CheckUpdates(true);
         }
 
-        private void MailContact_Click(object sender, RoutedEventArgs e)
-        {
-            string to = "pungin@msn.com ";
-            string subject = TryFindResource("Feedback") as string;
-            string body = string.Format(TryFindResource("FeedbackText") as string, version.Text);
-            System.Diagnostics.Process.Start($"mailto:{to}?subject={subject}&body={body}");
-        }
-
         private void Github_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/pungin/Beanfun/issues/new");
+            System.Diagnostics.Process.Start("https://github.com/pungin/Beanfun");
         }
     }
 }

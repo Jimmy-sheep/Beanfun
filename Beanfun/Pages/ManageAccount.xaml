@@ -14,6 +14,8 @@
         <Setter Property="Background" Value="#7FF5F5F5" />
         <Setter Property="Foreground" Value="Black" />
       </Style>
+      <SolidColorBrush x:Key="ListViewItem.Static.MouseOver" Color="#FFD0BF" />
+      <SolidColorBrush x:Key="ListViewItem.Static.Selected" Color="#FF9E6C" />
       <Style TargetType="{x:Type TextBox}" />
       <Style TargetType="{x:Type ListBox}" />
     </ResourceDictionary>
@@ -21,7 +23,7 @@
 
   <Grid>
     <StackPanel>
-      <DockPanel>
+      <DockPanel Margin="20,0,20,0">
         <Path
           Fill="White"
           Margin="5,0,0,0"
@@ -133,6 +135,13 @@
                   </Style>
                 </Button.Resources>
               </Button>
+              <GridSplitter
+                Background="Gray"
+                VerticalAlignment="Stretch"
+                Width="1"
+                Margin="5,0,5,0"
+                IsTabStop="False"
+              />
               <Button
                 x:Name="btn_HK"
                 Content="{DynamicResource HongKong}"
@@ -221,6 +230,59 @@
               Height="200"
               SelectionChanged="list_Account_SelectionChanged"
             >
+              <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                  <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                  <Setter Property="Padding" Value="5,2" />
+
+                  <Setter Property="Template">
+                    <Setter.Value>
+                      <ControlTemplate TargetType="ListViewItem">
+                        <Border
+                          x:Name="Bd"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          Padding="{TemplateBinding Padding}"
+                        >
+                          <GridViewRowPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                          />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                          <Trigger Property="IsSelected" Value="True">
+                            <Setter
+                              TargetName="Bd"
+                              Property="Background"
+                              Value="{StaticResource ListViewItem.Static.Selected}"
+                            />
+                            <Setter Property="Foreground" Value="White" />
+                          </Trigger>
+                          <Trigger Property="IsMouseOver" Value="True">
+                            <Setter
+                              TargetName="Bd"
+                              Property="Background"
+                              Value="{StaticResource ListViewItem.Static.MouseOver}"
+                            />
+                          </Trigger>
+                          <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                              <Condition Property="IsSelected" Value="True" />
+                              <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter
+                              TargetName="Bd"
+                              Property="Background"
+                              Value="{StaticResource ListViewItem.Static.Selected}"
+                            />
+                          </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                      </ControlTemplate>
+                    </Setter.Value>
+                  </Setter>
+                </Style>
+              </ListView.ItemContainerStyle>
               <ListView.View>
                 <GridView AllowsColumnReorder="False">
                   <GridViewColumn

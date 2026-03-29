@@ -21,7 +21,7 @@
 
   <Grid>
     <StackPanel>
-      <DockPanel>
+      <DockPanel Margin="20,0,20,0">
         <Path
           Fill="White"
           Margin="5,0,0,0"
@@ -47,8 +47,8 @@
         </Label>
       </DockPanel>
       <StackPanel Background="#7FFFFFFF">
-        <StackPanel Margin="10">
-          <DockPanel Margin="0,0,0,3">
+        <StackPanel Margin="20,10,20,20">
+          <DockPanel>
             <Label Content="{DynamicResource AppName}" Foreground="Gray" />
             <GridSplitter
               Background="Gray"
@@ -57,85 +57,107 @@
               IsTabStop="False"
             />
           </DockPanel>
-          <StackPanel Orientation="Horizontal">
-            <StackPanel>
+          <Grid Width="260">
+            <Grid.RowDefinitions>
+              <RowDefinition />
+              <RowDefinition />
+              <RowDefinition />
+              <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto" />
+              <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Row="0" Grid.Column="0">
+              <Label Content="{DynamicResource UpdateChannel}" />
+              <ComboBox
+                x:Name="cb_UpdateChannel"
+                VerticalContentAlignment="Center"
+                SelectedIndex="0"
+                SelectionChanged="cb_UpdateChannel_SelectionChanged"
+              >
+                <ComboBoxItem Content="{DynamicResource Stable}" />
+                <ComboBoxItem Content="{DynamicResource Development}" />
+              </ComboBox>
+            </DockPanel>
+            <DockPanel Grid.Row="1" Grid.Column="0">
+              <Label Content="{DynamicResource Language}" />
+              <ComboBox
+                x:Name="cb_Language"
+                VerticalContentAlignment="Center"
+                SelectionChanged="cb_Language_SelectionChanged"
+              />
+            </DockPanel>
+            <DockPanel Grid.Row="2" Grid.Column="0">
+              <Label Content="{DynamicResource ThemeColor}" VerticalAlignment="Center" />
+              <ComboBox
+                x:Name="cb_ThemeColor"
+                VerticalContentAlignment="Center"
+                SelectedIndex="0"
+                IsEditable="True"
+                TextBoxBase.TextChanged="cb_ThemeColor_TextChanged"
+              >
+                <ComboBoxItem Content="#FF8201" />
+                <ComboBoxItem Content="#B6DE8E" />
+                <ComboBoxItem Content="White" />
+                <ComboBoxItem Content="Black" />
+                <ComboBoxItem Content="LightBlue" />
+                <ComboBoxItem Content="Pink" />
+                <ComboBoxItem Content="Gold" />
+                <ComboBoxItem Content="Silver" />
+              </ComboBox>
+            </DockPanel>
+            <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,1,0,1">
               <Button
                 Content="{DynamicResource ManageAccount}"
                 Margin="2"
                 Click="ManageAcc_Click"
               />
-              <DockPanel>
-                <Label Content="{DynamicResource UpdateChannel}" />
-                <ComboBox
-                  x:Name="cb_UpdateChannel"
-                  SelectedIndex="0"
-                  SelectionChanged="cb_UpdateChannel_SelectionChanged"
-                >
-                  <ComboBoxItem Content="{DynamicResource Stable}" />
-                  <ComboBoxItem Content="{DynamicResource Development}" />
-                </ComboBox>
-              </DockPanel>
-              <DockPanel>
-                <Label Content="{DynamicResource Language}" />
-                <ComboBox x:Name="cb_Language" SelectionChanged="cb_Language_SelectionChanged" />
-              </DockPanel>
-              <DockPanel>
-                <Label Content="{DynamicResource ThemeColor}" VerticalAlignment="Center" />
-                <ComboBox
-                  x:Name="cb_ThemeColor"
-                  SelectedIndex="0"
-                  IsEditable="True"
-                  TextBoxBase.TextChanged="cb_ThemeColor_TextChanged"
-                >
-                  <ComboBoxItem Content="#FF8201" />
-                  <ComboBoxItem Content="#B6DE8E" />
-                  <ComboBoxItem Content="White" />
-                  <ComboBoxItem Content="Black" />
-                  <ComboBoxItem Content="LightBlue" />
-                  <ComboBoxItem Content="Pink" />
-                  <ComboBoxItem Content="Gold" />
-                  <ComboBoxItem Content="Silver" />
-                </ComboBox>
-              </DockPanel>
             </StackPanel>
-            <StackPanel>
-              <CheckBox
-                x:Name="ask_update"
-                Margin="2"
-                Content="{DynamicResource AutoCheckUpdate}"
-                Checked="ask_update_CheckedChanged"
-                Unchecked="ask_update_CheckedChanged"
-                IsChecked="True"
-              />
-              <CheckBox
-                x:Name="autoStartGame"
-                Margin="2"
-                Content="{DynamicResource RunAfterLogin}"
-                Checked="autoStartGame_CheckedChanged"
-                Unchecked="autoStartGame_CheckedChanged"
-              />
-              <CheckBox
-                x:Name="minimize_to_tray"
-                Margin="2"
-                Content="{DynamicResource MinimizeToTaskbar}"
-                Checked="minimize_to_tray_CheckedChanged"
-                Unchecked="minimize_to_tray_CheckedChanged"
-              />
-              <CheckBox
-                x:Name="disableHardwareAcceleration"
-                Margin="2"
-                Content="{DynamicResource DisableHardwareAcceleration}"
-                Checked="disableHardwareAcceleration_CheckedChanged"
-                Unchecked="disableHardwareAcceleration_CheckedChanged"
-                Cursor="Help"
-              >
-                <CheckBox.ToolTip>
-                  <ContentControl Content="{DynamicResource DisableHardwareAccelerationTip}" />
-                </CheckBox.ToolTip>
-              </CheckBox>
-            </StackPanel>
-          </StackPanel>
-          <DockPanel Margin="0,3">
+            <CheckBox
+              Grid.Row="0"
+              Grid.Column="1"
+              x:Name="ask_update"
+              Margin="2"
+              Content="{DynamicResource AutoCheckUpdate}"
+              VerticalContentAlignment="Center"
+              Checked="ask_update_CheckedChanged"
+              Unchecked="ask_update_CheckedChanged"
+              IsChecked="True"
+            />
+            <CheckBox
+              Grid.Row="1"
+              Grid.Column="1"
+              x:Name="autoStartGame"
+              Margin="2"
+              Content="{DynamicResource RunAfterLogin}"
+              VerticalContentAlignment="Center"
+              Checked="autoStartGame_CheckedChanged"
+              Unchecked="autoStartGame_CheckedChanged"
+            />
+            <CheckBox
+              Grid.Row="2"
+              Grid.Column="1"
+              x:Name="minimize_to_tray"
+              Margin="2"
+              Content="{DynamicResource MinimizeToTaskbar}"
+              VerticalContentAlignment="Center"
+              Checked="minimize_to_tray_CheckedChanged"
+              Unchecked="minimize_to_tray_CheckedChanged"
+            />
+            <CheckBox
+              Grid.Row="3"
+              Grid.Column="1"
+              x:Name="disableHardwareAcceleration"
+              Margin="2"
+              Content="{DynamicResource DisableHardwareAcceleration}"
+              VerticalContentAlignment="Center"
+              Checked="disableHardwareAcceleration_CheckedChanged"
+              Unchecked="disableHardwareAcceleration_CheckedChanged"
+              Cursor="Help"
+            />
+          </Grid>
+          <DockPanel>
             <Label Content="{DynamicResource Game}" Foreground="Gray" />
             <GridSplitter
               Background="Gray"
@@ -144,12 +166,11 @@
               IsTabStop="False"
             />
           </DockPanel>
-          <DockPanel Margin="2">
+          <DockPanel>
             <Label Content="{DynamicResource GamePath}" VerticalAlignment="Center" />
             <TextBox
               x:Name="t_GamePath"
               VerticalContentAlignment="Center"
-              MinWidth="200"
               Margin="2"
               IsReadOnly="True"
             />
@@ -160,6 +181,7 @@
                 x:Name="tradLogin"
                 Margin="2"
                 Content="{DynamicResource TraditionalLoginMode}"
+                VerticalContentAlignment="Center"
                 Checked="tradLogin_CheckedChanged"
                 Unchecked="tradLogin_CheckedChanged"
                 IsChecked="True"
@@ -173,6 +195,7 @@
                 x:Name="autoKillPatcher"
                 Margin="2"
                 Content="{DynamicResource KillPatcher}"
+                VerticalContentAlignment="Center"
                 Checked="autoKillPatcher_CheckedChanged"
                 Unchecked="autoKillPatcher_CheckedChanged"
                 IsChecked="True"
@@ -188,6 +211,7 @@
                 x:Name="skipPlayWnd"
                 Margin="2"
                 Content="{DynamicResource SkipPlayWindow}"
+                VerticalContentAlignment="Center"
                 Checked="skipPlayWnd_CheckedChanged"
                 Unchecked="skipPlayWnd_CheckedChanged"
                 IsChecked="True"
@@ -207,6 +231,7 @@
           </StackPanel>
           <Button
             Content="{DynamicResource Back}"
+            Width="150"
             Margin="0,5,0,0"
             Click="Button_Click"
             IsCancel="True"

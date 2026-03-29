@@ -41,7 +41,7 @@
   <system:String x:Key="Version">版本</system:String>
   <system:String x:Key="CheckUpdate">檢測更新</system:String>
   <system:String x:Key="AboutText"
-    >&lt;R&gt;本程式&lt;B&gt;&lt;R Foreground="Red"&gt;不是&lt;/R&gt;遊戲橘子數位科技&lt;/B&gt;開發的官方客戶端程式&lt;L/&gt;&lt;L/&gt;關於遊戲帳號使用第三方的方式登入請再三斟酌並且請確認您下載當前程式的途徑是否安全&lt;L/&gt;&lt;L/&gt;程式使用部分BeanfunLogin的代碼&lt;L/&gt;&lt;/R&gt;</system:String
+    >&lt;R&gt;本程式&lt;B&gt;&lt;R Foreground="Red"&gt;不是&lt;/R&gt;遊戲橘子數位科技&lt;/B&gt;開發的官方客戶端程式&lt;L/&gt;&lt;L/&gt;關於遊戲帳號使用第三方的方式登入請再三斟酌並且請確認您下載目前程式的途徑是否安全&lt;L/&gt;&lt;L/&gt;程式使用部分BeanfunLogin的程式碼&lt;L/&gt;&lt;/R&gt;</system:String
   >
   <system:String x:Key="Contact">聯繫開發者</system:String>
   <system:String x:Key="Email">發送電郵</system:String>
@@ -57,12 +57,12 @@
   <system:String x:Key="GashRemainInGame"> (遊戲內 {0})</system:String>
   <system:String x:Key="GashRefresh">更新點數</system:String>
   <system:String x:Key="GashRecharge">儲值與購點</system:String>
-  <system:String x:Key="AppGashRecharge">兌換beanfun!App樂豆點</system:String>
   <system:String x:Key="MemberCenter">會員中心</system:String>
   <system:String x:Key="CustomerService">客服中心</system:String>
   <system:String x:Key="RightClickMenu">右鍵開啟選單</system:String>
   <system:String x:Key="AccountBanned">帳號已鎖定</system:String>
   <system:String x:Key="DoubleClickCopy">雙擊複製帳號</system:String>
+  <system:String x:Key="DragDropSort">拖曳以排序</system:String>
   <system:String x:Key="CopyGameAccount">複製遊戲帳號</system:String>
   <system:String x:Key="ChangeAccountName">編輯遊戲帳號</system:String>
   <system:String x:Key="ChangeAccountPassword">修改帳號密碼</system:String>
@@ -100,7 +100,7 @@
   <system:String x:Key="MsgDeleteAccount"
     >即將移除帳號「{0}」，此操作不可恢復，是否確認要移除？</system:String
   >
-  <system:String x:Key="MsgLogging">正在登入,請稍等...</system:String>
+  <system:String x:Key="MsgLogging">正在登入，請稍候...</system:String>
   <system:String x:Key="Cancel">取消</system:String>
   <system:String x:Key="ManageAccount">管理帳號</system:String>
   <system:String x:Key="Taiwan">台灣</system:String>
@@ -119,16 +119,16 @@
   >
   <system:String x:Key="MsgDeleteAccountMulti">{0} 個帳號</system:String>
   <system:String x:Key="MsgDeleteAccountSingle">帳號「{0}」</system:String>
-  <system:String x:Key="RefreshQRCode">重新加載</system:String>
+  <system:String x:Key="RefreshQRCode">重新載入</system:String>
   <system:String x:Key="BackRegularLogin">返回一般登入</system:String>
   <system:String x:Key="UpdateChannel">更新通道</system:String>
   <system:String x:Key="Stable">穩定版</system:String>
   <system:String x:Key="Development">測試版</system:String>
   <system:String x:Key="ThemeColor">主題顏色</system:String>
-  <system:String x:Key="AutoCheckUpdate">有新版本時提示更新</system:String>
-  <system:String x:Key="RunAfterLogin">登入完成後開啟遊戲</system:String>
+  <system:String x:Key="AutoCheckUpdate">版本更新提示</system:String>
+  <system:String x:Key="RunAfterLogin">登入後開啟遊戲</system:String>
   <system:String x:Key="MinimizeToTaskbar">最小化到工具列</system:String>
-  <system:String x:Key="DisableHardwareAcceleration">關閉硬體加速（降低 GPU 使用）</system:String>
+  <system:String x:Key="DisableHardwareAcceleration">關閉硬體加速</system:String>
   <TextBlock x:Key="DisableHardwareAccelerationTip" TextWrapping="Wrap">
     <Run Text="以軟體渲染介面與內嵌網頁，可減輕顯示卡負載與待機功耗；畫面可能較不流暢、較耗 CPU。" />
     <LineBreak />
@@ -136,7 +136,7 @@
   </TextBlock>
   <system:String x:Key="MsgRestartForHardwareAccelTitle">需要重新啟動</system:String>
   <system:String x:Key="MsgRestartForHardwareAccel"
-    >已變更硬體加速相關設定。請完全關閉 Beanfun 後再開啟，主視窗才會套用 WPF 軟體渲染。</system:String
+    >已變更硬體加速相關設定。請完全關閉繽放後再開啟，主視窗才會套用 WPF 軟體渲染。</system:String
   >
   <system:String x:Key="Game">遊戲</system:String>
   <system:String x:Key="GamePath">遊戲路徑</system:String>
@@ -201,18 +201,19 @@
   <system:String x:Key="CopyFinished">複製完成</system:String>
   <system:String x:Key="CopyFailed">複製失敗</system:String>
   <system:String x:Key="EquipStarForceCaculator">裝備卷軸星力計算器</system:String>
-  <system:String x:Key="EquipType">裝備分類:</system:String>
+  <system:String x:Key="EquipType">裝備分類：</system:String>
   <system:String x:Key="Weapon">武器</system:String>
   <system:String x:Key="Glove">手套</system:String>
   <system:String x:Key="Armor">其他防具</system:String>
   <system:String x:Key="Accessory">飾品</system:String>
   <system:String x:Key="Heart">心臟</system:String>
   <system:String x:Key="HeartNotice">※卷軸素質套用武器卷</system:String>
+  <system:String x:Key="ReqLvl">要求等級：</system:String>
   <system:String x:Key="Superior">尊貴</system:String>
-  <system:String x:Key="Stat_">屬性:</system:String>
-  <system:String x:Key="Atk_Matk_">攻擊力/魔力:</system:String>
+  <system:String x:Key="Stat_">屬性：</system:String>
+  <system:String x:Key="Atk_Matk_">攻擊力/魔力：</system:String>
   <system:String x:Key="StarForce">套用 </system:String>
-  <system:String x:Key="StarForceSplit">星強化（最多　</system:String>
+  <system:String x:Key="StarForceSplit">星強化（最多</system:String>
   <system:String x:Key="StarsInFused">星）</system:String>
   <system:String x:Key="ScrollDestiny">命運卷</system:String>
   <system:String x:Key="ScrollGlory">榮耀卷</system:String>
@@ -224,9 +225,9 @@
   <system:String x:Key="ScrollSuMin">宿命卷</system:String>
   <system:String x:Key="ScrollChuanShuo">傳說卷</system:String>
   <system:String x:Key="ScrollOthers">其他卷素質</system:String>
-  <system:String x:Key="GloryMin">最低</system:String>
-  <system:String x:Key="GloryAverage">平均</system:String>
-  <system:String x:Key="GloryMax">最高</system:String>
+  <system:String x:Key="ScrollValueMin">最低</system:String>
+  <system:String x:Key="ScrollValueAverage">平均</system:String>
+  <system:String x:Key="ScrollValueMax">最高</system:String>
   <system:String x:Key="Sheet">張</system:String>
   <system:String x:Key="Stat">屬性</system:String>
   <system:String x:Key="Atk_Matk">攻擊力/魔力</system:String>
@@ -239,14 +240,14 @@
   <system:String x:Key="RiderSearch">車手搜尋</system:String>
   <system:String x:Key="CreateConvoy">建立車隊</system:String>
   <system:String x:Key="LeaveConvoy">離開車隊</system:String>
-  <system:String x:Key="BeanfunRegionSelected">請選擇Beanfun區域</system:String>
+  <system:String x:Key="GamaniaRegionSelected">請選擇遊戲橘子地區</system:String>
   <system:String x:Key="RegionSelected">請選擇使用區域</system:String>
   <system:String x:Key="Recycling">回收楓之谷資料夾空間</system:String>
   <system:String x:Key="MsgRecycling">是否需要回收空間(更新遊戲時請不要使用此功能)？</system:String>
   <system:String x:Key="MsgRecyclingDone">楓之谷資料夾空間回收完成</system:String>
   <system:String x:Key="PlayerReport">外掛檢舉(GM上線核實)</system:String>
   <system:String x:Key="MsgPlayerReport"
-    >「新楓之谷」即時檢舉功能需要登入台灣Beanfun帳號，不支援香港Beanfun帳號，您可以自行註冊一個台灣Beanfun帳號用來檢舉。</system:String
+    >「新楓之谷」即時檢舉功能需要登入台灣Gama Pass帳號，不支援香港遊戲橘子帳號，您可以自行註冊一個台灣Gama Pass帳號用來檢舉。</system:String
   >
   <system:String x:Key="VideoReport">皇家糾察隊(錄影檢舉)</system:String>
   <system:String x:Key="ServiceAccountInfo">帳號詳情</system:String>
@@ -306,7 +307,7 @@
   <system:String x:Key="GetOtpError">密碼取得失敗。</system:String>
   <system:String x:Key="InitAccountError">帳號記錄初始化失敗，未知的錯誤。</system:String>
   <system:String x:Key="LoadDataError"
-    >從樂豆官網加載訊息出錯，錯誤訊息：{0}\r\n\r\n\r\n可能有如下原因：\r\n1.樂豆網站暫時維修中無法訪問\r\n2.本機無法直接與樂豆連線\r\n3.如果有用遊戲代理然後瀏覽器能訪問樂豆網站，那麼可能就是代理沒有對本應用進行代理</system:String
+    >從樂豆官網載入訊息出錯，錯誤訊息：{0}\r\n\r\n\r\n可能有如下原因：\r\n1.樂豆網站暫時維修中無法訪問\r\n2.本機無法直接與樂豆連線\r\n3.如果有用遊戲代理然後瀏覽器能訪問樂豆網站，那麼可能就是代理沒有對本應用進行代理</system:String
   >
   <system:String x:Key="FileDialog_Filter">主程式|{0}|全部檔案 (*.*)|*.*</system:String>
   <system:String x:Key="FileDialog_Title">請選擇 {0} 檔案</system:String>
@@ -405,7 +406,7 @@
   <system:String x:Key="UpdateCheck">更新檢測</system:String>
   <system:String x:Key="NoUpdatesDetected">未檢測到有更新。</system:String>
   <system:String x:Key="NewVersionDetected"
-    >檢測到新版本 {0} 當前: {1}\r\n\r\n{2}\r\n\r\n是否打開下載頁面？</system:String
+    >檢測到新版本 {0} 目前: {1}\r\n\r\n{2}\r\n\r\n是否打開下載頁面？</system:String
   >
   <system:String x:Key="Language">程式語言</system:String>
   <system:String x:Key="InputTotp">輸入應用程式內顯示的雙重驗證碼</system:String>
