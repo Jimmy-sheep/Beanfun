@@ -1,4 +1,4 @@
-﻿/*
+/*
  * 開發此功能主要用為多帳號時儲存
  * 以原有加解密寫法為基礎
  * 加上一層wrapper並用Serializable方式儲存資料
@@ -13,9 +13,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.Security.Cryptography;
 using System.Text;
+using Newtonsoft.Json;
 using Utility.ModifyRegistry;
 
 namespace Beanfun
@@ -61,6 +61,13 @@ namespace Beanfun
 
     public class AccountManager
     {
+        private static readonly log4net.ILog log = log4net.LogManager.GetLogger(
+            typeof(AccountManager)
+        );
+
+        private const string MigrationToolUrl =
+            "https://github.com/pungin/Beanfun/releases/tag/account-migrator";
+
         private Records accountRecords = null;
         private string dataPath =
             System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData)
@@ -170,21 +177,17 @@ namespace Beanfun
             var raw = readRawData();
             if (raw != null)
             {
-                byte[] cipher = Convert.FromBase64String(raw);
-
-                using (Stream stream = new MemoryStream(cipher))
+                try
                 {
-                    var bformatter =
-                        new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-
-                    object records = bformatter.Deserialize(stream);
-                    if (records is AccountRecords)
+                    accountRecords = JsonConvert.DeserializeObject<Records>(raw);
+                }
+                catch
+                {
+                    accountRecords = null;
+                    if (IsLegacyFormat(raw))
                     {
-                        accountRecords = Records.Change(records);
-                    }
-                    else
-                    {
-                        accountRecords = (Records)records;
+                        log.Warn("Detected legacy BinaryFormatter account data");
+                        ShowLegacyFormatWarning();
                     }
                 }
             }
@@ -195,22 +198,8 @@ namespace Beanfun
 
         private bool storeRecord()
         {
-            using (var memoryStream = new MemoryStream())
-            {
-                // Serialize to memory instead of to file
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(memoryStream, accountRecords);
-
-                // This resets the memory stream position for the following read operation
-                memoryStream.Seek(0, SeekOrigin.Begin);
-
-                // Get the bytes
-                var bytes = new byte[memoryStream.Length];
-                memoryStream.Read(bytes, 0, (int)memoryStream.Length);
-
-                writeRawData(Convert.ToBase64String(bytes));
-            }
-
+            string json = JsonConvert.SerializeObject(accountRecords);
+            writeRawData(json);
             return true;
         }
         #endregion
@@ -491,28 +480,16 @@ namespace Beanfun
         {
             try
             {
-                byte[] cipher = Convert.FromBase64String(raw);
-
-                using (Stream stream = new MemoryStream(cipher))
-                {
-                    var bformatter =
-                        new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-
-                    object records = bformatter.Deserialize(stream);
-                    if (records is AccountRecords)
-                    {
-                        accountRecords = Records.Change(records);
-                    }
-                    else
-                    {
-                        accountRecords = (Records)records;
-                    }
-                }
+                accountRecords = JsonConvert.DeserializeObject<Records>(raw);
                 accRecInit();
                 storeRecord();
             }
             catch
             {
+                if (IsLegacyFormat(raw))
+                {
+                    ShowLegacyFormatWarning();
+                }
                 return false;
             }
 
@@ -521,20 +498,39 @@ namespace Beanfun
 
         public string exportRecord()
         {
-            using (var memoryStream = new MemoryStream())
+            return JsonConvert.SerializeObject(accountRecords);
+        }
+        #endregion
+
+        #region Legacy format migration
+        private static bool IsLegacyFormat(string raw)
+        {
+            if (string.IsNullOrWhiteSpace(raw))
+                return false;
+            var trimmed = raw.TrimStart();
+            return !trimmed.StartsWith("{") && !trimmed.StartsWith("[");
+        }
+
+        private static void ShowLegacyFormatWarning()
+        {
+            var result = System.Windows.MessageBox.Show(
+                "偵測到舊版帳號資料格式（BinaryFormatter），此格式在新版中不再支援。\n\n"
+                    + "是否前往下載帳號資料轉換工具？\n"
+                    + "轉換完成後重新啟動程式即可恢復帳號資料。",
+                "帳號資料格式不相容",
+                System.Windows.MessageBoxButton.YesNo,
+                System.Windows.MessageBoxImage.Warning
+            );
+
+            if (result == System.Windows.MessageBoxResult.Yes)
             {
-                // Serialize to memory instead of to file
-                var formatter = new BinaryFormatter();
-                formatter.Serialize(memoryStream, accountRecords);
-
-                // This resets the memory stream position for the following read operation
-                memoryStream.Seek(0, SeekOrigin.Begin);
-
-                // Get the bytes
-                var bytes = new byte[memoryStream.Length];
-                memoryStream.Read(bytes, 0, (int)memoryStream.Length);
-
-                return Convert.ToBase64String(bytes);
+                System.Diagnostics.Process.Start(
+                    new System.Diagnostics.ProcessStartInfo
+                    {
+                        FileName = MigrationToolUrl,
+                        UseShellExecute = true,
+                    }
+                );
             }
         }
         #endregion

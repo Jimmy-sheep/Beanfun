@@ -314,8 +314,6 @@ namespace Beanfun
             {
                 if (App.OSVersion < App.Win11)
                 {
-                    if (App.OSVersion >= App.Win8_1)
-                        ServicePointManager.SecurityProtocol |= SecurityProtocolType.Ssl3;
                     ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls12;
                     ServicePointManager.ServerCertificateValidationCallback = (
                         sender,
@@ -675,8 +673,8 @@ namespace Beanfun
                     )
                 );
 
-                IniDataParser idp = new IniDataParser();
-                INIData = idp.Parse(res);
+                IniDataParser parser = new IniDataParser();
+                INIData = parser.Parse(res);
 
                 res = Encoding.UTF8.GetString(
                     wc.DownloadData(
@@ -1276,7 +1274,7 @@ namespace Beanfun
             catch (Exception ex)
             {
                 e.Result =
-                    TryFindResource("LoginErrorUnknown") as string
+                    (TryFindResource("LoginErrorUnknown") as string)
                     + "\n\n"
                     + ex.Message
                     + "\n"
@@ -1457,7 +1455,7 @@ namespace Beanfun
             catch (Exception ex)
             {
                 e.Result =
-                    TryFindResource("LoginErrorUnknown") as string
+                    (TryFindResource("LoginErrorUnknown") as string)
                     + "\n\n"
                     + ex.Message
                     + "\n"

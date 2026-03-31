@@ -10,7 +10,7 @@ namespace Beanfun
     /// </summary>
     public partial class Settings : Page
     {
-        class Language
+        class LanguageItem
         {
             public string Name { get; set; }
             public string DisplayName { get; set; }
@@ -20,17 +20,15 @@ namespace Beanfun
         {
             InitializeComponent();
 
-            List<Language> languageList = new List<Language>
-            {
-                new Language { Name = "zh-Hant", DisplayName = "中文(繁體)" },
-                new Language { Name = "zh-Hans", DisplayName = "中文(简体)" },
-            };
+            List<LanguageItem> languageList = new List<LanguageItem>();
+            languageList.Add(new LanguageItem { Name = "zh-Hant", DisplayName = "中文(繁體)" });
+            languageList.Add(new LanguageItem { Name = "zh-Hans", DisplayName = "中文(简体)" });
             cb_Language.ItemsSource = languageList;
             cb_Language.DisplayMemberPath = "DisplayName";
             cb_Language.SelectedValuePath = "Name";
             string cultureName = I18n.CultureName.ToUpper();
             string name = null;
-            foreach (Language language in languageList)
+            foreach (LanguageItem language in languageList)
             {
                 if (language.Name.ToUpper().Equals(cultureName))
                 {
