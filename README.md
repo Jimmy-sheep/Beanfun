@@ -35,7 +35,7 @@ Download available at <https://github.com/pungin/Beanfun/releases/latest>.
 ## Built With
 
 * [.NET 8](https://dotnet.microsoft.com/en-us/download/dotnet/8.0) - 目標框架（Self-contained，使用者不需另外安裝）
-* [ini-parser](https://github.com/rickyah/ini-parser) - ini元件
+* [ini-parser-netstandard](https://github.com/lukazh/ini-parser-standard) - ini元件
 * [log4net](https://logging.apache.org/log4net/) - 日誌元件
 * [Newtonsoft.Json](https://www.newtonsoft.com/json) - JSON元件
 * [Microsoft.Web.WebView2](https://www.nuget.org/packages/Microsoft.Web.WebView2) - 內嵌瀏覽器元件
@@ -43,6 +43,42 @@ Download available at <https://github.com/pungin/Beanfun/releases/latest>.
 * [Locale_Remulator](https://github.com/InWILL/Locale_Remulator) - 區域模擬元件
 
 ## Development
+
+### 建置發行版本
+
+```bash
+# 清理並發行單一 exe（Self-contained，不需安裝 .NET Runtime）
+dotnet clean Beanfun/Beanfun.csproj -c Release
+dotnet publish Beanfun/Beanfun.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:IncludeNativeLibrariesForSelfExtract=true -p:IncludeAllContentForSelfExtract=true -p:EnableCompressionInSingleFile=true -p:DebugType=none -o publish
+```
+
+產出的 `publish/Beanfun.exe` 即為可直接發行的單一執行檔。
+
+### 發佈流程
+
+透過 GitHub Actions 的 **Build and Release** workflow 進行發佈，於 [Actions 頁面](../../actions/workflows/build-and-release.yml) 手動觸發。
+
+#### 參數說明
+
+| 參數 | 說明 | 預設值 |
+|------|------|--------|
+| `release_type` | `release`（正式版）或 `prerelease`（測試版） | `prerelease` |
+| `version_increment` | 版本遞增方式：`patch` / `minor` / `major` | `patch` |
+| `release_name` | 自訂發佈名稱（留空自動產生） | 空 |
+
+#### 版本格式
+
+Tag 格式為 `v{major}.{minor}.{patch}.{timestamp}`，例如 `v5.7.2.2603311234`。
+
+| 操作 | 範例 | AssemblyInfo.cs |
+|------|------|-----------------|
+| patch | v5.7.1 → v5.7.2 | 不變 |
+| minor | v5.7.2 → v5.8.0 | 更新為 5.8.* |
+| major | v5.8.0 → v6.0.0 | 更新為 6.0.* |
+
+- Patch 值自動從最新的 git tag 解析並遞增
+- Release name 留空時自動產生，例如 `Release v5.7.2` 或 `Pre-Release v5.7.2`
+- `prerelease` 模式不會修改 AssemblyInfo.cs，僅遞增 patch
 
 ### 程式碼格式化
 
