@@ -23,6 +23,7 @@ namespace Beanfun
             List<LanguageItem> languageList = new List<LanguageItem>();
             languageList.Add(new LanguageItem { Name = "zh-Hant", DisplayName = "中文(繁體)" });
             languageList.Add(new LanguageItem { Name = "zh-Hans", DisplayName = "中文(简体)" });
+            languageList.Add(new LanguageItem { Name = "en", DisplayName = "English" });
             cb_Language.ItemsSource = languageList;
             cb_Language.DisplayMemberPath = "DisplayName";
             cb_Language.SelectedValuePath = "Name";

@@ -633,12 +633,11 @@
         />
       </StackPanel>
     </DockPanel>
-    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,20,20">
+    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="20,0,0,20">
       <Button
         x:Name="btn_GamePass"
-        Margin="10,10,10,0"
-        Width="22"
-        Height="22"
+        Width="24"
+        Height="24"
         HorizontalAlignment="Right"
         Visibility="Collapsed"
         ToolTip="{DynamicResource GamePassLogin}"

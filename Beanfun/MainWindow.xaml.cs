@@ -2081,7 +2081,6 @@ namespace Beanfun
             accountList.btnGetOtp.Content = TryFindResource("GetOtp") as string;
             if (e.Error != null)
             {
-                Console.WriteLine("e.Error != null");
                 errexit(e.Error.Message, 2, TryFindResource("GetOtpFailed") as string);
             }
             else
@@ -2090,7 +2089,6 @@ namespace Beanfun
 
                 if (index == -1)
                 {
-                    Console.WriteLine("else index == -1");
                     errexit(this.bfClient.errmsg, 2, TryFindResource("GetOtpFailed") as string);
                 }
                 else
