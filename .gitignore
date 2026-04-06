@@ -270,3 +270,5 @@ Beanfun/LRHookx64.dll
 Beanfun/LRProc.exe
 Beanfun/LRSubMenus.dll
 
+# Local scripts
+sync-upstream.ps1

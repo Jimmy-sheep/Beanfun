@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System;
+using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
@@ -45,7 +47,14 @@ namespace Beanfun
 
         private void Github_Click(object sender, RoutedEventArgs e)
         {
-            System.Diagnostics.Process.Start("https://github.com/pungin/Beanfun");
+            // Fix for .NET 8
+            System.Diagnostics.Process.Start(
+                new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = "https://github.com/pungin/Beanfun",
+                    UseShellExecute = true,
+                }
+            );
         }
     }
 }

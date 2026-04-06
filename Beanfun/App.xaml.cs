@@ -1,6 +1,5 @@
 using System;
 using System.Diagnostics;
-using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -77,69 +76,65 @@ namespace Beanfun
                 catch { }
         }
 
-        public static Version ParseVersion(string version)
-        {
-            var oldFormatMatch = Regex.Match(version, @"^(\d+)\.(\d+)\.(\d+)\((\d+)\)$");
-            if (oldFormatMatch.Success)
-            {
-                return new Version(
-                    int.Parse(oldFormatMatch.Groups[1].Value),
-                    int.Parse(oldFormatMatch.Groups[2].Value),
-                    int.Parse(oldFormatMatch.Groups[3].Value),
-                    int.Parse(oldFormatMatch.Groups[4].Value)
-                );
-            }
-            var newFormatMatch = Regex.Match(version, @"^(\d+)\.(\d+)\((\d{10})\)$");
-            if (newFormatMatch.Success)
-            {
-                var dateStr = newFormatMatch.Groups[3].Value;
-                var buildDate = DateTime.ParseExact(
-                    dateStr,
-                    "yyMMddHHmm",
-                    CultureInfo.InvariantCulture
-                );
-
-                var baseDate = new DateTime(2000, 1, 1);
-                var build = (int)(buildDate - baseDate).TotalDays;
-                var revision = (int)(buildDate.TimeOfDay.TotalSeconds / 2);
-
-                return new Version(
-                    int.Parse(newFormatMatch.Groups[1].Value),
-                    int.Parse(newFormatMatch.Groups[2].Value),
-                    build,
-                    revision
-                );
-            }
-
-            throw new FormatException();
-        }
-
+        // --- 版本轉換邏輯 (處理幽靈點問題) ---
         public static string ConvertVersion(Version version)
         {
             if (version < new Version(4, 1))
                 return $"{version.Major}.{version.Minor}.{version.Build}({version.Revision})";
+
             DateTime buildDate = new DateTime(2000, 1, 1)
                 .AddDays(version.Build)
                 .AddSeconds(version.Revision * 2);
-            return $"{version.Major}.{version.Minor}({buildDate.ToString("yyMMddHHmm")})";
+
+            string timestamp = buildDate.ToString("yyMMddHHmm");
+
+            // 關鍵：如果 Build < 1000 代表係 Patch 號碼
+            if (version.Build < 1000)
+            {
+                // 格式: 5.8.3(2604011114)
+                return $"{version.Major}.{version.Minor}.{version.Build}({timestamp})";
+            }
+            else
+            {
+                // 格式: 5.8(2604011114)
+                return $"{version.Major}.{version.Minor}({timestamp})";
+            }
         }
 
         internal static string AssemblyVersion
         {
-            get { return ConvertVersion(Assembly.GetExecutingAssembly().GetName().Version); }
+            get
+            {
+                var attr = Assembly
+                    .GetExecutingAssembly()
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+                if (attr != null && !string.IsNullOrEmpty(attr.InformationalVersion))
+                {
+                    string ver = attr.InformationalVersion;
+
+                    int plusIndex = ver.IndexOf('+');
+                    if (plusIndex > 0)
+                        ver = ver.Substring(0, plusIndex);
+
+                    if (ver.Contains("("))
+                        return ver;
+                }
+
+                return ConvertVersion(Assembly.GetExecutingAssembly().GetName().Version);
+            }
         }
+
+        public static readonly string AppDir = Path.GetDirectoryName(
+            Process.GetCurrentProcess().MainModule.FileName
+        );
 
         public static int ReleaseResource(string file)
         {
-            string baseDir = Path.GetDirectoryName(
-                System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName
-            );
-            string path = Path.Combine(baseDir, file);
+            string path = Path.Combine(AppDir, file);
             using (Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(file))
             {
                 if (stream != null)
                 {
-                    // Fast path: if file exists and size matches, skip MD5 comparison
                     if (File.Exists(path))
                     {
                         var fileInfo = new FileInfo(path);
@@ -175,19 +170,17 @@ namespace Beanfun
         {
             try
             {
-                FileStream file = new FileStream(
+                using FileStream file = new FileStream(
                     fileName,
                     FileMode.Open,
                     FileAccess.Read,
                     FileShare.ReadWrite
                 );
-                string md5 = GetMD5HashFromStream(file);
-                file.Close();
-                return md5;
+                return GetMD5HashFromStream(file);
             }
             catch (Exception ex)
             {
-                throw new Exception("GetMD5HashFromFile() fail,error:" + ex.Message);
+                throw new Exception("GetMD5HashFromFile() fail, error: " + ex.Message);
             }
         }
 
@@ -206,7 +199,7 @@ namespace Beanfun
             }
             catch (Exception ex)
             {
-                throw new Exception("GetMD5HashFromStream() fail,error:" + ex.Message);
+                throw new Exception("GetMD5HashFromStream() fail, error: " + ex.Message);
             }
         }
     }
