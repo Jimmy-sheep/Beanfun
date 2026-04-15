@@ -64,6 +64,7 @@ namespace Beanfun
         public AccountManager accountManager = null;
 
         public BeanfunClient bfClient;
+        private readonly object _bfClientLock = new object();
 
         public BeanfunClient.QRCodeClass qrcodeClass;
 
@@ -374,8 +375,9 @@ namespace Beanfun
                 );
                 if (loginMethod < (int)LoginMethod.Regular)
                     loginMethod = int.Parse(ConfigAppSettings.GetValue("loginMethod", "0"));
-                if (loginMethod > (int)LoginMethod.GamePass)
-                    loginMethod = (int)LoginMethod.GamePass;
+                // Don't restore QRCode/GamePass on startup — they require active auth sessions
+                if (loginMethod > (int)LoginMethod.Regular)
+                    loginMethod = (int)LoginMethod.Regular;
 
                 loginMethodInit();
 
@@ -1009,6 +1011,7 @@ namespace Beanfun
         public void loginMethodChanged()
         {
             qrCheckLogin.IsEnabled = false;
+            btn_Region.IsEnabled = true;
 
             if (App.LoginRegion == "TW")
             {
@@ -2074,11 +2077,6 @@ namespace Beanfun
         private void getOtpWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             CancelWork();
-            //if (this.pingWorker.IsBusy) this.pingWorker.CancelAsync();
-            /*while (this.pingWorker.IsBusy) {
-                Thread.Sleep(133);
-            }
-            */
 
             Console.WriteLine("getOtpWorker start");
             Thread.CurrentThread.Name = "GetOTP Worker";
@@ -2089,11 +2087,19 @@ namespace Beanfun
                 return;
             }
             Console.WriteLine("call GetOTP");
-            this.otp = this.bfClient.GetOTP(
-                this.bfClient.accountList[index],
-                this.service_code,
-                this.service_region
-            );
+            Monitor.Enter(_bfClientLock);
+            try
+            {
+                this.otp = this.bfClient.GetOTP(
+                    this.bfClient.accountList[index],
+                    this.service_code,
+                    this.service_region
+                );
+            }
+            finally
+            {
+                Monitor.Exit(_bfClientLock);
+            }
             Console.WriteLine("call GetOTP done");
             if (this.otp == null)
                 e.Result = -1;
@@ -2102,8 +2108,6 @@ namespace Beanfun
                 e.Result = index;
             }
 
-            //if (!this.pingWorker.IsBusy) this.pingWorker.RunWorkerAsync();
-            //this.pingWorker.RunWorkerAsync();
             ResumeWork();
             return;
         }
@@ -2260,16 +2264,29 @@ namespace Beanfun
                     break;
                 }
 
-                if (this.getOtpWorker.IsBusy || this.loginWorker.IsBusy || this.totpWorker.IsBusy)
+                if (
+                    this.getOtpWorker.IsBusy
+                    || this.loginWorker.IsBusy
+                    || this.totpWorker.IsBusy
+                    || this.qrWorker.IsBusy
+                    || this.verifyWorker.IsBusy
+                )
                 {
                     Console.WriteLine("ping.busy sleep 1s");
                     System.Threading.Thread.Sleep(1000 * 1);
                     continue;
                 }
 
-                if (this.bfClient != null)
+                if (this.bfClient != null && Monitor.TryEnter(_bfClientLock))
                 {
-                    this.bfClient.Ping();
+                    try
+                    {
+                        this.bfClient.Ping();
+                    }
+                    finally
+                    {
+                        Monitor.Exit(_bfClientLock);
+                    }
                 }
 
                 for (int i = 0; i < WaitSecs; ++i)
@@ -2307,7 +2324,17 @@ namespace Beanfun
                 MessageBox.Show("QRCode not get yet");
                 return;
             }
-            int res = this.bfClient.QRCodeCheckLoginStatus(this.qrcodeClass);
+            if (!Monitor.TryEnter(_bfClientLock))
+                return;
+            int res;
+            try
+            {
+                res = this.bfClient.QRCodeCheckLoginStatus(this.qrcodeClass);
+            }
+            finally
+            {
+                Monitor.Exit(_bfClientLock);
+            }
             if (res != 0)
                 this.qrCheckLogin.IsEnabled = false;
             if (res == 1)
@@ -2351,7 +2378,17 @@ namespace Beanfun
 
         private void bfAPPAutoLogin_Tick(object sender, EventArgs e)
         {
-            JObject resultJson = this.bfClient.CheckIsRegisteDevice(service_code, service_region);
+            if (!Monitor.TryEnter(_bfClientLock))
+                return;
+            JObject resultJson;
+            try
+            {
+                resultJson = this.bfClient.CheckIsRegisteDevice(service_code, service_region);
+            }
+            finally
+            {
+                Monitor.Exit(_bfClientLock);
+            }
             if (resultJson == null || resultJson["IntResult"] == null)
                 return;
             if ((string)resultJson["IntResult"] != "1" && (string)resultJson["IntResult"] != "0")
