@@ -48,12 +48,8 @@ namespace Beanfun
         private void Github_Click(object sender, RoutedEventArgs e)
         {
             // Fix for .NET 8
-            System.Diagnostics.Process.Start(
-                new System.Diagnostics.ProcessStartInfo
-                {
-                    FileName = "https://github.com/pungin/Beanfun",
-                    UseShellExecute = true,
-                }
+            Process.Start(
+                new ProcessStartInfo("https://github.com/pungin/Beanfun") { UseShellExecute = true }
             );
         }
     }

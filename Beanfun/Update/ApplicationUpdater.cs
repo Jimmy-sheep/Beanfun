@@ -95,11 +95,7 @@ namespace Beanfun.Update
                                     : $"https://github.com/pungin/Beanfun/releases/tag/{release.TagName}";
 
                             Process.Start(
-                                new ProcessStartInfo
-                                {
-                                    FileName = downloadUrl,
-                                    UseShellExecute = true,
-                                }
+                                new ProcessStartInfo(downloadUrl) { UseShellExecute = true }
                             );
                         }
                     }
